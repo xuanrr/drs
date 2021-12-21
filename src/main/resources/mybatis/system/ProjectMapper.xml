@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.project.mapper.ProjectMapper">
+    
+    <resultMap type="Project" id="ProjectResult">
+        <result property="id"    column="id"    />
+        <result property="code"    column="code"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="customerId"    column="customer_id"    />
+        <result property="manDay"    column="man_day"    />
+        <result property="vendorNeeded"    column="vendor_needed"    />
+        <result property="entrustType"    column="entrust_type"    />
+        <result property="vendorId"    column="vendor_id"    />
+        <result property="available"    column="available"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectProjectVo">
+        select id, code, start_date, end_date, customer_id, man_day, vendor_needed, entrust_type, vendor_id, available, create_by, create_time, update_by, update_time from m_project
+    </sql>
+
+    <select id="selectProjectList" parameterType="Project" resultMap="ProjectResult">
+        <include refid="selectProjectVo"/>
+        <where>  
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="startDate != null "> and start_date = #{startDate}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+            <if test="manDay != null "> and man_day = #{manDay}</if>
+            <if test="vendorNeeded != null "> and vendor_needed = #{vendorNeeded}</if>
+            <if test="vendorId != null "> and vendor_id = #{vendorId}</if>
+            <if test="available != null "> and available = #{available}</if>
+        </where>
+    </select>
+    
+    <select id="selectProjectById" parameterType="Long" resultMap="ProjectResult">
+        <include refid="selectProjectVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertProject" parameterType="Project" useGeneratedKeys="true" keyProperty="id">
+        insert into m_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null and code != ''">code,</if>
+            <if test="startDate != null">start_date,</if>
+            <if test="endDate != null">end_date,</if>
+            <if test="customerId != null">customer_id,</if>
+            <if test="manDay != null">man_day,</if>
+            <if test="vendorNeeded != null">vendor_needed,</if>
+            <if test="entrustType != null">entrust_type,</if>
+            <if test="vendorId != null">vendor_id,</if>
+            <if test="available != null">available,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="startDate != null">#{startDate},</if>
+            <if test="endDate != null">#{endDate},</if>
+            <if test="customerId != null">#{customerId},</if>
+            <if test="manDay != null">#{manDay},</if>
+            <if test="vendorNeeded != null">#{vendorNeeded},</if>
+            <if test="entrustType != null">#{entrustType},</if>
+            <if test="vendorId != null">#{vendorId},</if>
+            <if test="available != null">#{available},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProject" parameterType="Project">
+        update m_project
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="startDate != null">start_date = #{startDate},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+            <if test="customerId != null">customer_id = #{customerId},</if>
+            <if test="manDay != null">man_day = #{manDay},</if>
+            <if test="vendorNeeded != null">vendor_needed = #{vendorNeeded},</if>
+            <if test="entrustType != null">entrust_type = #{entrustType},</if>
+            <if test="vendorId != null">vendor_id = #{vendorId},</if>
+            <if test="available != null">available = #{available},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteProjectById" parameterType="Long">
+        delete from m_project where id = #{id}
+    </delete>
+
+    <delete id="deleteProjectByIds" parameterType="String">
+        delete from m_project where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

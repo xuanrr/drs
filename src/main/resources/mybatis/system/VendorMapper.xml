@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.vendor.mapper.VendorMapper">
+    
+    <resultMap type="Vendor" id="VendorResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="manDay"    column="man_day"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectVendorVo">
+        select id, name, man_day, remark, create_by, create_time, update_by, update_time from m_vendor
+    </sql>
+
+    <select id="selectVendorList" parameterType="Vendor" resultMap="VendorResult">
+        <include refid="selectVendorVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="manDay != null "> and man_day = #{manDay}</if>
+        </where>
+    </select>
+    
+    <select id="selectVendorById" parameterType="Long" resultMap="VendorResult">
+        <include refid="selectVendorVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVendor" parameterType="Vendor" useGeneratedKeys="true" keyProperty="id">
+        insert into m_vendor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="manDay != null">man_day,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="manDay != null">#{manDay},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVendor" parameterType="Vendor">
+        update m_vendor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="manDay != null">man_day = #{manDay},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVendorById" parameterType="Long">
+        delete from m_vendor where id = #{id}
+    </delete>
+
+    <delete id="deleteVendorByIds" parameterType="String">
+        delete from m_vendor where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
