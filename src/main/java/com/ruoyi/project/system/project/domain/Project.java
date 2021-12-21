@@ -50,7 +50,7 @@ public class Project extends BaseEntity
 
     /** 供应商 */
     @Excel(name = "供应商")
-    private Long vendorId;
+    private String vendorName;
 
     /** 是否有效 */
     @Excel(name = "是否有效")
@@ -128,14 +128,14 @@ public class Project extends BaseEntity
     {
         return entrustType;
     }
-    public void setVendorId(Long vendorId)
+    public void setVendorName(String vendorName)
     {
-        this.vendorId = vendorId;
+        this.vendorName = vendorName;
     }
 
-    public Long getVendorId()
+    public String getVendorName()
     {
-        return vendorId;
+        return vendorName;
     }
     public void setAvailable(Long available)
     {
@@ -158,7 +158,7 @@ public class Project extends BaseEntity
             .append("manDay", getManDay())
             .append("vendorNeeded", getVendorNeeded())
             .append("entrustType", getEntrustType())
-            .append("vendorId", getVendorId())
+            .append("vendorName", getVendorName())
             .append("available", getAvailable())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())

@@ -2,6 +2,7 @@ package com.ruoyi.project.system.project.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.system.project.mapper.ProjectMapper;
@@ -54,6 +55,9 @@ public class ProjectServiceImpl implements IProjectService
     @Override
     public int insertProject(Project project)
     {
+        project.setUpdateBy(ShiroUtils.getLoginName());
+        project.setUpdateTime(DateUtils.getNowDate());
+        project.setCreateBy(ShiroUtils.getLoginName());
         project.setCreateTime(DateUtils.getNowDate());
         return projectMapper.insertProject(project);
     }
@@ -67,6 +71,7 @@ public class ProjectServiceImpl implements IProjectService
     @Override
     public int updateProject(Project project)
     {
+        project.setUpdateBy(ShiroUtils.getLoginName());
         project.setUpdateTime(DateUtils.getNowDate());
         return projectMapper.updateProject(project);
     }
