@@ -2,6 +2,7 @@ package com.ruoyi.project.system.project.mapper;
 
 import java.util.List;
 import com.ruoyi.project.system.project.domain.Project;
+import org.springframework.stereotype.Repository;
 
 /**
  * 项目Mapper接口
@@ -9,6 +10,7 @@ import com.ruoyi.project.system.project.domain.Project;
  * @author zxy
  * @date 2021-12-21
  */
+@Repository
 public interface ProjectMapper 
 {
     /**

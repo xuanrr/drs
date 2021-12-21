@@ -2,12 +2,14 @@ package com.ruoyi.project.system.dict.mapper;
 
 import java.util.List;
 import com.ruoyi.project.system.dict.domain.DictType;
+import org.springframework.stereotype.Repository;
 
 /**
  * 字典表 数据层
  * 
  * @author ruoyi
  */
+@Repository
 public interface DictTypeMapper
 {
     /**

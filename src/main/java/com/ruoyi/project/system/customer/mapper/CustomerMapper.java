@@ -2,6 +2,7 @@ package com.ruoyi.project.system.customer.mapper;
 
 import java.util.List;
 import com.ruoyi.project.system.customer.domain.Customer;
+import org.springframework.stereotype.Repository;
 
 /**
  * 客户Mapper接口
@@ -9,6 +10,7 @@ import com.ruoyi.project.system.customer.domain.Customer;
  * @author zxy
  * @date 2021-12-21
  */
+@Repository
 public interface CustomerMapper 
 {
     /**

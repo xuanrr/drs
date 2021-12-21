@@ -3,12 +3,14 @@ package com.ruoyi.project.system.dict.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import com.ruoyi.project.system.dict.domain.DictData;
+import org.springframework.stereotype.Repository;
 
 /**
  * 字典表 数据层
  * 
  * @author ruoyi
  */
+@Repository
 public interface DictDataMapper
 {
     /**
