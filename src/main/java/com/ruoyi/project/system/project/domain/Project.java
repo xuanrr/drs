@@ -11,7 +11,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
  * 项目对象 m_project
  * 
  * @author zxy
- * @date 2021-12-21
+ * @date 2021-12-23
  */
 public class Project extends BaseEntity
 {
@@ -19,6 +19,10 @@ public class Project extends BaseEntity
 
     /**  */
     private Long id;
+
+    /** 项目名称 */
+    @Excel(name = "项目名称")
+    private String name;
 
     /** 项目代码 */
     @Excel(name = "项目代码")
@@ -64,6 +68,15 @@ public class Project extends BaseEntity
     public Long getId()
     {
         return id;
+    }
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getName()
+    {
+        return name;
     }
     public void setCode(String code)
     {
@@ -151,6 +164,7 @@ public class Project extends BaseEntity
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
+            .append("name", getName())
             .append("code", getCode())
             .append("startDate", getStartDate())
             .append("endDate", getEndDate())

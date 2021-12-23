@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('供应商列表')" />
+    <th:block th:include="include :: header('公司列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,12 +11,26 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>名称：</label>
+                                <label>公司名称：</label>
                                 <input type="text" name="name"/>
                             </li>
                             <li>
-                                <label>人天：</label>
-                                <input type="text" name="manDay"/>
+                                <label>类型：</label>
+                                <select name="companyType" th:with="type=${@dict.getType('m_company_type')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>公司代码：</label>
+                                <input type="text" name="code"/>
+                            </li>
+                            <li>
+                                <label>是否有效：</label>
+                                <select name="available" th:with="type=${@dict.getType('sys_yes_no')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -28,16 +42,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:vendor:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:company:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:vendor:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:company:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:vendor:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:company:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:vendor:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:company:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -48,9 +62,11 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:vendor:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:vendor:remove')}]];
-        var prefix = ctx + "system/vendor";
+        var editFlag = [[${@permission.hasPermi('system:company:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:company:remove')}]];
+        var companyTypeDatas = [[${@dict.getType('m_company_type')}]];
+        var availableDatas = [[${@dict.getType('sys_yes_no')}]];
+        var prefix = ctx + "system/company";
 
         $(function() {
             var options = {
@@ -59,7 +75,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "供应商",
+                modalName: "公司",
                 columns: [{
                     checkbox: true
                 },
@@ -70,15 +86,25 @@
                 },
                 {
                     field: 'name',
-                    title: '名称'
+                    title: '公司名称'
                 },
                 {
-                    field: 'manDay',
-                    title: '人天'
+                    field: 'companyType',
+                    title: '类型',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(companyTypeDatas, value);
+                    }
                 },
                 {
-                    field: 'remark',
-                    title: '备注'
+                    field: 'code',
+                    title: '公司代码'
+                },
+                {
+                    field: 'available',
+                    title: '是否有效',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(availableDatas, value);
+                    }
                 },
                 {
                     field: 'createBy',

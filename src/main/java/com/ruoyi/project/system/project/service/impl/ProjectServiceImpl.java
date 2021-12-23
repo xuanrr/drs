@@ -14,7 +14,7 @@ import com.ruoyi.common.utils.text.Convert;
  * 项目Service业务层处理
  * 
  * @author zxy
- * @date 2021-12-21
+ * @date 2021-12-23
  */
 @Service
 public class ProjectServiceImpl implements IProjectService 
@@ -55,10 +55,10 @@ public class ProjectServiceImpl implements IProjectService
     @Override
     public int insertProject(Project project)
     {
-        project.setUpdateBy(ShiroUtils.getLoginName());
-        project.setUpdateTime(DateUtils.getNowDate());
         project.setCreateBy(ShiroUtils.getLoginName());
         project.setCreateTime(DateUtils.getNowDate());
+        project.setUpdateBy(ShiroUtils.getLoginName());
+        project.setUpdateTime(DateUtils.getNowDate());
         return projectMapper.insertProject(project);
     }
 

@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="Project" id="ProjectResult">
         <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
         <result property="code"    column="code"    />
         <result property="startDate"    column="start_date"    />
         <result property="endDate"    column="end_date"    />
@@ -22,12 +23,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectProjectVo">
-        select id, code, start_date, end_date, customer_id, man_day, vendor_needed, entrust_type, vendor_name, available, create_by, create_time, update_by, update_time from m_project
+        select id, name, code, start_date, end_date, customer_id, man_day, vendor_needed, entrust_type, vendor_name, available, create_by, create_time, update_by, update_time from m_project
     </sql>
 
     <select id="selectProjectList" parameterType="Project" resultMap="ProjectResult">
         <include refid="selectProjectVo"/>
         <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="startDate != null "> and start_date = #{startDate}</if>
             <if test="endDate != null "> and end_date = #{endDate}</if>
@@ -46,6 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertProject" parameterType="Project" useGeneratedKeys="true" keyProperty="id">
         insert into m_project
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
             <if test="code != null and code != ''">code,</if>
             <if test="startDate != null">start_date,</if>
             <if test="endDate != null">end_date,</if>
@@ -61,6 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">update_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
             <if test="code != null and code != ''">#{code},</if>
             <if test="startDate != null">#{startDate},</if>
             <if test="endDate != null">#{endDate},</if>
@@ -80,6 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateProject" parameterType="Project">
         update m_project
         <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
             <if test="code != null and code != ''">code = #{code},</if>
             <if test="startDate != null">start_date = #{startDate},</if>
             <if test="endDate != null">end_date = #{endDate},</if>

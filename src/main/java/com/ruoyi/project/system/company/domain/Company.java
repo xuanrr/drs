@@ -1,4 +1,4 @@
-package com.ruoyi.project.system.vendor.domain;
+package com.ruoyi.project.system.company.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -6,25 +6,33 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
- * 供应商对象 m_vendor
+ * 公司对象 m_company
  * 
  * @author zxy
- * @date 2021-12-21
+ * @date 2021-12-23
  */
-public class Vendor extends BaseEntity
+public class Company extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /**  */
     private Long id;
 
-    /** 名称 */
-    @Excel(name = "名称")
+    /** 公司名称 */
+    @Excel(name = "公司名称")
     private String name;
 
-    /** 人天 */
-    @Excel(name = "人天")
-    private Long manDay;
+    /** 类型 */
+    @Excel(name = "类型")
+    private Long companyType;
+
+    /** 公司代码 */
+    @Excel(name = "公司代码")
+    private String code;
+
+    /** 是否有效 */
+    @Excel(name = "是否有效")
+    private Long available;
 
     public void setId(Long id)
     {
@@ -44,14 +52,32 @@ public class Vendor extends BaseEntity
     {
         return name;
     }
-    public void setManDay(Long manDay)
+    public void setCompanyType(Long companyType)
     {
-        this.manDay = manDay;
+        this.companyType = companyType;
     }
 
-    public Long getManDay()
+    public Long getCompanyType()
     {
-        return manDay;
+        return companyType;
+    }
+    public void setCode(String code)
+    {
+        this.code = code;
+    }
+
+    public String getCode()
+    {
+        return code;
+    }
+    public void setAvailable(Long available)
+    {
+        this.available = available;
+    }
+
+    public Long getAvailable()
+    {
+        return available;
     }
 
     @Override
@@ -59,8 +85,10 @@ public class Vendor extends BaseEntity
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("name", getName())
-            .append("manDay", getManDay())
+            .append("companyType", getCompanyType())
+            .append("code", getCode())
             .append("remark", getRemark())
+            .append("available", getAvailable())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())

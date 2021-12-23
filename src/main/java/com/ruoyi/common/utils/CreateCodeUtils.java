@@ -1,7 +1,6 @@
 package com.ruoyi.common.utils;
 
-import com.ruoyi.project.system.customer.domain.Customer;
-import com.ruoyi.project.system.customer.service.ICustomerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.SimpleDateFormat;
@@ -12,7 +11,7 @@ public class CreateCodeUtils {
     /**
      * 自动生成编号格式：yyMM+四位流水号
      */
-    public static int CSTM_CODE=0;
+    public static int COMPANY_CODE=0;
 //    @Autowired
 //    ICustomerService customerService;
 //    @Autowired
@@ -35,8 +34,8 @@ public class CreateCodeUtils {
 //        int num=list.size();
 //        num = num>0?num:-num;
 //        int length = String.valueOf(num).length();
-        String flowNum=CSTM_CODE+"";
-        for(int i=0;i<=3-CSTM_CODE;i++){
+        String flowNum=COMPANY_CODE+"";
+        for(int i=0;i<=3-COMPANY_CODE;i++){
             String zero="0";
             flowNum=zero+flowNum;
         }
@@ -56,7 +55,7 @@ public class CreateCodeUtils {
 //            comment_code = uid_pfix + "0001";
 //        }
         // System.out.println(comment_code);
-        j="C"+comment_code+flowNum;
+        j="C"+uid_pfix+flowNum;
         return j;
     }
 

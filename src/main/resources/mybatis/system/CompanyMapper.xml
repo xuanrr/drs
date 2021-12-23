@@ -2,87 +2,88 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.project.system.customer.mapper.CustomerMapper">
+<mapper namespace="com.ruoyi.project.system.company.mapper.CompanyMapper">
     
-    <resultMap type="Customer" id="CustomerResult">
+    <resultMap type="Company" id="CompanyResult">
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
-        <result property="customerType"    column="customer_type"    />
-        <result property="remark"    column="remark"    />
+        <result property="companyType"    column="company_type"    />
         <result property="code"    column="code"    />
+        <result property="remark"    column="remark"    />
+        <result property="available"    column="available"    />
         <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
-        <result property="available"    column="available"    />
-        <result property="createTime"    column="create_time"    />
     </resultMap>
 
-    <sql id="selectCustomerVo">
-        select id, name, customer_type, remark, code, create_by, update_by, update_time, available, create_time from m_customer
+    <sql id="selectCompanyVo">
+        select id, name, company_type, code, remark, available, create_by, create_time, update_by, update_time from m_company
     </sql>
 
-    <select id="selectCustomerList" parameterType="Customer" resultMap="CustomerResult">
-        <include refid="selectCustomerVo"/>
+    <select id="selectCompanyList" parameterType="Company" resultMap="CompanyResult">
+        <include refid="selectCompanyVo"/>
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="customerType != null "> and customer_type = #{customerType}</if>
+            <if test="companyType != null "> and company_type = #{companyType}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="available != null "> and available = #{available}</if>
         </where>
     </select>
     
-    <select id="selectCustomerById" parameterType="Long" resultMap="CustomerResult">
-        <include refid="selectCustomerVo"/>
+    <select id="selectCompanyById" parameterType="Long" resultMap="CompanyResult">
+        <include refid="selectCompanyVo"/>
         where id = #{id}
     </select>
         
-    <insert id="insertCustomer" parameterType="Customer" useGeneratedKeys="true" keyProperty="id">
-        insert into m_customer
+    <insert id="insertCompany" parameterType="Company" useGeneratedKeys="true" keyProperty="id">
+        insert into m_company
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null and name != ''">name,</if>
-            <if test="customerType != null">customer_type,</if>
-            <if test="remark != null">remark,</if>
+            <if test="companyType != null">company_type,</if>
             <if test="code != null">code,</if>
+            <if test="remark != null">remark,</if>
+            <if test="available != null">available,</if>
             <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
-            <if test="available != null">available,</if>
-            <if test="createTime != null">create_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null and name != ''">#{name},</if>
-            <if test="customerType != null">#{customerType},</if>
-            <if test="remark != null">#{remark},</if>
+            <if test="companyType != null">#{companyType},</if>
             <if test="code != null">#{code},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="available != null">#{available},</if>
             <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
-            <if test="available != null">#{available},</if>
-            <if test="createTime != null">#{createTime},</if>
          </trim>
     </insert>
 
-    <update id="updateCustomer" parameterType="Customer">
-        update m_customer
+    <update id="updateCompany" parameterType="Company">
+        update m_company
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null and name != ''">name = #{name},</if>
-            <if test="customerType != null">customer_type = #{customerType},</if>
-            <if test="remark != null">remark = #{remark},</if>
+            <if test="companyType != null">company_type = #{companyType},</if>
             <if test="code != null">code = #{code},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="available != null">available = #{available},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
-            <if test="available != null">available = #{available},</if>
-            <if test="createTime != null">create_time = #{createTime},</if>
         </trim>
         where id = #{id}
     </update>
 
-    <delete id="deleteCustomerById" parameterType="Long">
-        delete from m_customer where id = #{id}
+    <delete id="deleteCompanyById" parameterType="Long">
+        delete from m_company where id = #{id}
     </delete>
 
-    <delete id="deleteCustomerByIds" parameterType="String">
-        delete from m_customer where id in 
+    <delete id="deleteCompanyByIds" parameterType="String">
+        delete from m_company where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
