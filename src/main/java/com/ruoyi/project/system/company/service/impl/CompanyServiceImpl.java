@@ -39,6 +39,11 @@ public class CompanyServiceImpl implements ICompanyService
     }
 
     @Override
+    public String selectLastCode() {
+        return companyMapper.selectLastCode();
+    }
+
+    @Override
     public List<Company> selectVendorAll() {
         return companyMapper.selectVendorAll();
     }

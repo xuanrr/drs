@@ -30,6 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="available != null "> and available = #{available}</if>
         </where>
     </select>
+
+    <select id="selectLastCode" parameterType="String">
+        select code from m_company order by create_time desc limit 1
+    </select>
     
     <select id="selectCompanyById" parameterType="Long" resultMap="CompanyResult">
         <include refid="selectCompanyVo"/>

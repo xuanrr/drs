@@ -30,6 +30,8 @@ public interface CompanyMapper
      */
     public List<Company> selectCompanyList(Company company);
 
+    public String selectLastCode();
+
     /**
      * 新增公司
      * 
