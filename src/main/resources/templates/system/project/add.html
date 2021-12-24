@@ -43,30 +43,28 @@
                     <input name="manDay" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label is-required">是否需要供应商：</label>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">是否需要供应商:</label>
+                <div class="col-sm-9">
+                    <label class="radio-box">
+                        <input type="radio" checked="" value="1" name="vendorNeeded">是</label>
+                    <label class="radio-box">
+                        <input type="radio" value="0" name="vendorNeeded">否</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">供应商:</label>
                 <div class="col-sm-8">
-                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_yes_no')}">
-                        <input type="radio" th:id="${'vendorNeeded_' + dict.dictCode}" name="vendorNeeded" th:value="${dict.dictValue}" th:checked="${dict.default}" required>
-                        <label th:for="${'vendorNeeded_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">供应商</label>
-                        <div class="col-xs-4">
-                            <select id="post" class="form-control select2-multiple" multiple>
-                                <option th:each="vendor:${vendors}" th:value="${vendor.name}" th:text="${vendor.name}" }"></option>
+                            <select id="vendor" name="vendor" class="form-control">
+                                <option th:each="vendor:${vendors}" th:value="${vendor.name}" th:text="${vendor.name}" ></option>
                             </select>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <div class="form-group">    
+
+
+            <div class="form-group">
                 <label class="col-sm-3 control-label is-required">是否有效：</label>
                 <div class="col-sm-8">
                     <div class="radio-box" th:each="dict : ${@dict.getType('sys_yes_no')}">
@@ -87,7 +85,10 @@
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/add", $('#form-project-add').serialize());
+                var data = $("#form-project-add").serializeArray();
+                var vendorName = $.form.selectSelects("vendor");
+                data.push({"name": "vendorName", "value": vendorName});
+                $.operate.save(prefix + "/add", data);
             }
         }
 
@@ -101,6 +102,22 @@
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true
+        });
+
+        $(function() {
+            $('#vendor').select2({
+                placeholder: "请选择岗位",
+                allowClear: true
+            });
+        })
+
+        $('input').on('ifChecked', function(event){
+            var vendorNeeded = $(event.target).val();
+            if (vendorNeeded == "0") {
+                $("#vendor").parents(".form-group").hide();
+            }else if (vendorNeeded == "1") {
+                $("#vendor").parents(".form-group").show();
+            }
         });
     </script>
 </body>
