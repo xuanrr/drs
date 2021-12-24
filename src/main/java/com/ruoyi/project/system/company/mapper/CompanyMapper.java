@@ -21,6 +21,7 @@ public interface CompanyMapper
      */
     public Company selectCompanyById(Long id);
 
+    public List<Company> selectVendorAll();
     /**
      * 查询公司列表
      * 

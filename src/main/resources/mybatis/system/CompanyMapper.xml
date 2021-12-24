@@ -35,7 +35,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectCompanyVo"/>
         where id = #{id}
     </select>
-        
+
+    <select id="selectVendorAll" resultMap="CompanyResult">
+        <include refid="selectCompanyVo"/>
+#         where company_type in (2,3)
+    </select>
     <insert id="insertCompany" parameterType="Company" useGeneratedKeys="true" keyProperty="id">
         insert into m_company
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -38,6 +38,11 @@ public class CompanyServiceImpl implements ICompanyService
         return companyMapper.selectCompanyById(id);
     }
 
+    @Override
+    public List<Company> selectVendorAll() {
+        return companyMapper.selectVendorAll();
+    }
+
     /**
      * 查询公司列表
      * 

@@ -53,6 +53,19 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">供应商</label>
+                        <div class="col-xs-4">
+                            <select id="post" class="form-control select2-multiple" multiple>
+                                <option th:each="vendor:${vendors}" th:value="${vendor.name}" th:text="${vendor.name}" }"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">    
                 <label class="col-sm-3 control-label is-required">是否有效：</label>
                 <div class="col-sm-8">
