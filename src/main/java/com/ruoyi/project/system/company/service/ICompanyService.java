@@ -19,7 +19,7 @@ public interface ICompanyService
      */
     public Company selectCompanyById(Long id);
 
-    public String selectLastCode();
+    public Company selectLastCode();
 
     public List<Company> selectVendorAll();
     /**

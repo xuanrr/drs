@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
 
-    <select id="selectLastCode" parameterType="String">
+    <select id="selectLastCode" resultMap="CompanyResult">
         select code from m_company order by create_time desc limit 1
     </select>
     

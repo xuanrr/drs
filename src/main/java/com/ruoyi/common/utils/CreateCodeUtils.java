@@ -1,36 +1,51 @@
 package com.ruoyi.common.utils;
 
 
+import com.ruoyi.project.system.company.domain.Company;
 import com.ruoyi.project.system.company.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 //@Component
+@Repository
 public class CreateCodeUtils {
 
-    @Autowired
-    static
-    ICompanyService companyService;
-    static String s = companyService.selectLastCode();
+     @Autowired
+     ICompanyService companyService;
+//     Company company = companyService.selectLastCode();
+//     String s =company.getCode();
+//
+//     String result = s.substring(s.length()-4,s.length());
+//
+//
+//     int companyCode= Integer.parseInt(result);
 
-    static String result = s.substring(s.length()-4,s.length());
+
+    public  String createCode(){
+        Company company = companyService.selectLastCode();
+        String s =company.getCode();
+
+        String result = s.substring(s.length()-4,s.length());
 
 
-    public static int COMPANY_CODE= Integer.parseInt(result);
-
-
-    public static String createCode(){
+        int companyCode= Integer.parseInt(result)+1;//取到后四位整数
 
 //        ICompanyService companyService;
 //        String s = companyService.selectLastCode();
         String j = new String();
 
-        String comment_code = "";
-
-        String flowNum=COMPANY_CODE+"";
-        for(int i=0;i<=3-COMPANY_CODE;i++){
+        int digitNum=0;
+        int temp=companyCode;
+        while (temp!=0){
+            temp/=10;
+            digitNum++;
+        }
+        String flowNum=companyCode+"";
+        //加0
+        for(int i=0;i<=3-digitNum;i++){
             String zero="0";
             flowNum=zero+flowNum;
         }

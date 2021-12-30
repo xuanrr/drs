@@ -6,13 +6,13 @@ import com.ruoyi.common.utils.CreateCodeUtils;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.system.company.mapper.CompanyMapper;
 import com.ruoyi.project.system.company.domain.Company;
 import com.ruoyi.project.system.company.service.ICompanyService;
 import com.ruoyi.common.utils.text.Convert;
 
-import static com.ruoyi.common.utils.CreateCodeUtils.COMPANY_CODE;
 
 /**
  * 公司Service业务层处理
@@ -23,6 +23,9 @@ import static com.ruoyi.common.utils.CreateCodeUtils.COMPANY_CODE;
 @Service
 public class CompanyServiceImpl implements ICompanyService 
 {
+    @Autowired
+    @Lazy
+    private CreateCodeUtils createCodeUtils;
     @Autowired
     private CompanyMapper companyMapper;
 
@@ -39,7 +42,7 @@ public class CompanyServiceImpl implements ICompanyService
     }
 
     @Override
-    public String selectLastCode() {
+    public Company selectLastCode() {
         return companyMapper.selectLastCode();
     }
 
@@ -69,8 +72,7 @@ public class CompanyServiceImpl implements ICompanyService
     @Override
     public int insertCompany(Company company)
     {
-        COMPANY_CODE++;
-        company.setCode(CreateCodeUtils.createCode());
+        company.setCode(createCodeUtils.createCode());
         company.setCreateBy(ShiroUtils.getLoginName());
         company.setCreateTime(DateUtils.getNowDate());
         company.setUpdateBy(ShiroUtils.getLoginName());
