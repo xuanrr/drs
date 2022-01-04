@@ -53,6 +53,16 @@ public class Project extends BaseEntity
 
     private String customerName;
 
+    public String getEntrustName() {
+        return entrustName;
+    }
+
+    public void setEntrustName(String entrustName) {
+        this.entrustName = entrustName;
+    }
+
+    private String entrustName;
+
     /** 人天 */
     @Excel(name = "人天")
     private Long manDay;

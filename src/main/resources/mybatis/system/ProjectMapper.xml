@@ -29,8 +29,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectProjectList" parameterType="Project" resultMap="ProjectResult">
-        select p.id, p.name, p.code,mc.name customerName, p.start_date, p.end_date, p.customer_id, p.man_day, p.vendor_needed, p.entrust_type, p.vendor_name, p.available, p.create_by,p.vendor_manday, p.create_time, p.update_by, p.update_time from m_project p
+        select p.id, p.name, p.code,mc.name customerName, p.start_date, p.end_date, p.customer_id, p.man_day, p.vendor_needed, met.type entrustName, p.vendor_name, p.available, p.create_by,p.vendor_manday, p.create_time, p.update_by, p.update_time from m_project p
         left join m_company mc on p.customer_id = mc.id
+        left join m_entrust_type met on met.code=p.entrust_type
         <where>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
