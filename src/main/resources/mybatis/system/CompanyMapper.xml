@@ -3,12 +3,13 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.project.system.company.mapper.CompanyMapper">
-    
+
     <resultMap type="Company" id="CompanyResult">
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
-        <result property="companyType"    column="company_type"    />
+        <result property="isvendor"    column="isvendor"    />
         <result property="code"    column="code"    />
+        <result property="iscustomer"    column="iscustomer"    />
         <result property="remark"    column="remark"    />
         <result property="available"    column="available"    />
         <result property="createBy"    column="create_by"    />
@@ -18,15 +19,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectCompanyVo">
-        select id, name, company_type, code, remark, available, create_by, create_time, update_by, update_time from m_company
+        select id, name, isvendor, code, iscustomer, remark, available, create_by, create_time, update_by, update_time from m_company
     </sql>
 
     <select id="selectCompanyList" parameterType="Company" resultMap="CompanyResult">
         <include refid="selectCompanyVo"/>
-        <where>  
+        <where>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="companyType != null "> and company_type = #{companyType}</if>
+            <if test="isvendor != null "> and isvendor = #{isvendor}</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="iscustomer != null "> and iscustomer = #{iscustomer}</if>
             <if test="available != null "> and available = #{available}</if>
         </where>
     </select>
@@ -40,42 +42,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
 
+    <select id="selectCustomerAll" resultMap="CompanyResult">
+    <include refid="selectCompanyVo"/>
+    where iscustomer=1 and available=1
+</select>
+
     <select id="selectVendorAll" resultMap="CompanyResult">
         <include refid="selectCompanyVo"/>
-#         where company_type in (2,3)
+         where isvendor =1 and available=1
     </select>
     <insert id="insertCompany" parameterType="Company" useGeneratedKeys="true" keyProperty="id">
         insert into m_company
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null and name != ''">name,</if>
-            <if test="companyType != null">company_type,</if>
+            <if test="isvendor != null">isvendor,</if>
             <if test="code != null">code,</if>
+            <if test="iscustomer != null">iscustomer,</if>
             <if test="remark != null">remark,</if>
             <if test="available != null">available,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null and name != ''">#{name},</if>
-            <if test="companyType != null">#{companyType},</if>
+            <if test="isvendor != null">#{isvendor},</if>
             <if test="code != null">#{code},</if>
+            <if test="iscustomer != null">#{iscustomer},</if>
             <if test="remark != null">#{remark},</if>
             <if test="available != null">#{available},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateCompany" parameterType="Company">
         update m_company
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null and name != ''">name = #{name},</if>
-            <if test="companyType != null">company_type = #{companyType},</if>
+            <if test="isvendor != null">isvendor = #{isvendor},</if>
             <if test="code != null">code = #{code},</if>
+            <if test="iscustomer != null">iscustomer = #{iscustomer},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="available != null">available = #{available},</if>
             <if test="createBy != null">create_by = #{createBy},</if>

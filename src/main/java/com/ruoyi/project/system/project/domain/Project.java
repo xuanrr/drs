@@ -28,6 +28,8 @@ public class Project extends BaseEntity
     @Excel(name = "项目代码")
     private String code;
 
+
+
     /** 开始时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "开始时间", width = 30, dateFormat = "yyyy-MM-dd")
@@ -40,6 +42,16 @@ public class Project extends BaseEntity
 
     /** 客户 */
     private Long customerId;
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    private String customerName;
 
     /** 人天 */
     @Excel(name = "人天")
@@ -59,6 +71,18 @@ public class Project extends BaseEntity
     /** 是否有效 */
     @Excel(name = "是否有效")
     private Long available;
+
+    public Long getVendorManday() {
+        return vendorManday;
+    }
+
+    public void setVendorManday(Long vendorManday) {
+        this.vendorManday = vendorManday;
+    }
+
+    /** 供应商人天 */
+    @Excel(name = "供应商人天")
+    private Long vendorManday;
 
     public void setId(Long id)
     {

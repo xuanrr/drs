@@ -3,11 +3,11 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.project.system.project.mapper.ProjectMapper">
-    
+
     <resultMap type="Project" id="ProjectResult">
         <result property="id"    column="id"    />
-        <result property="name"    column="name"    />
         <result property="code"    column="code"    />
+        <result property="name"    column="name"    />
         <result property="startDate"    column="start_date"    />
         <result property="endDate"    column="end_date"    />
         <result property="customerId"    column="customer_id"    />
@@ -17,26 +17,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="vendorName"    column="vendor_name"    />
         <result property="available"    column="available"    />
         <result property="createBy"    column="create_by"    />
+        <result property="vendorManday"    column="vendor_manday"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectProjectVo">
-        select id, name, code, start_date, end_date, customer_id, man_day, vendor_needed, entrust_type, vendor_name, available, create_by, create_time, update_by, update_time from m_project
+        select id, code, name, start_date, end_date, customer_id, man_day, vendor_needed, entrust_type, vendor_name, available, create_by, vendor_manday, create_time, update_by, remark, update_time from m_project
     </sql>
 
     <select id="selectProjectList" parameterType="Project" resultMap="ProjectResult">
-        <include refid="selectProjectVo"/>
-        <where>  
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        select p.id, p.name, p.code,mc.name customerName, p.start_date, p.end_date, p.customer_id, p.man_day, p.vendor_needed, p.entrust_type, p.vendor_name, p.available, p.create_by,p.vendor_manday, p.create_time, p.update_by, p.update_time from m_project p
+        left join m_company mc on p.customer_id = mc.id
+        <where>
             <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="startDate != null "> and start_date = #{startDate}</if>
             <if test="endDate != null "> and end_date = #{endDate}</if>
+            <if test="customerId != null "> and customer_id = #{customerId}</if>
             <if test="manDay != null "> and man_day = #{manDay}</if>
             <if test="vendorNeeded != null "> and vendor_needed = #{vendorNeeded}</if>
+            <if test="entrustType != null "> and entrust_type = #{entrustType}</if>
             <if test="vendorName != null  and vendorName != ''"> and vendor_name like concat('%', #{vendorName}, '%')</if>
             <if test="available != null "> and available = #{available}</if>
+            <if test="vendorManday != null "> and vendor_manday = #{vendorManday}</if>
         </where>
     </select>
     
@@ -44,12 +50,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectProjectVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertProject" parameterType="Project" useGeneratedKeys="true" keyProperty="id">
         insert into m_project
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="name != null and name != ''">name,</if>
             <if test="code != null and code != ''">code,</if>
+            <if test="name != null and name != ''">name,</if>
             <if test="startDate != null">start_date,</if>
             <if test="endDate != null">end_date,</if>
             <if test="customerId != null">customer_id,</if>
@@ -59,13 +65,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="vendorName != null">vendor_name,</if>
             <if test="available != null">available,</if>
             <if test="createBy != null">create_by,</if>
+            <if test="vendorManday != null">vendor_manday,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
+            <if test="remark != null">remark,</if>
             <if test="updateTime != null">update_time,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="name != null and name != ''">#{name},</if>
             <if test="code != null and code != ''">#{code},</if>
+            <if test="name != null and name != ''">#{name},</if>
             <if test="startDate != null">#{startDate},</if>
             <if test="endDate != null">#{endDate},</if>
             <if test="customerId != null">#{customerId},</if>
@@ -75,17 +83,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="vendorName != null">#{vendorName},</if>
             <if test="available != null">#{available},</if>
             <if test="createBy != null">#{createBy},</if>
+            <if test="vendorManday != null">#{vendorManday},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
+            <if test="remark != null">#{remark},</if>
             <if test="updateTime != null">#{updateTime},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateProject" parameterType="Project">
         update m_project
         <trim prefix="SET" suffixOverrides=",">
-            <if test="name != null and name != ''">name = #{name},</if>
             <if test="code != null and code != ''">code = #{code},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
             <if test="startDate != null">start_date = #{startDate},</if>
             <if test="endDate != null">end_date = #{endDate},</if>
             <if test="customerId != null">customer_id = #{customerId},</if>
@@ -95,8 +105,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="vendorName != null">vendor_name = #{vendorName},</if>
             <if test="available != null">available = #{available},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="vendorManday != null">vendor_manday = #{vendorManday},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>
         where id = #{id}

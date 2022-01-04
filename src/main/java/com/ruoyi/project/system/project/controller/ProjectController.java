@@ -80,6 +80,7 @@ public class ProjectController extends BaseController
     public String add(ModelMap mmap)
     {
         mmap.put("vendors",companyService.selectVendorAll());
+        mmap.put("customers",companyService.selectCustomerAll());
         return prefix + "/add";
     }
 
@@ -103,6 +104,8 @@ public class ProjectController extends BaseController
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
         Project project = projectService.selectProjectById(id);
+        mmap.put("vendors",companyService.selectVendorAll());
+        mmap.put("customers",companyService.selectCustomerAll());
         mmap.put("project", project);
         return prefix + "/edit";
     }

@@ -4,81 +4,91 @@
     <th:block th:include="include :: header('公司列表')" />
 </head>
 <body class="gray-bg">
-     <div class="container-div">
-        <div class="row">
-            <div class="col-sm-12 search-collapse">
-                <form id="formId">
-                    <div class="select-list">
-                        <ul>
-                            <li>
-                                <label>公司名称：</label>
-                                <input type="text" name="name"/>
-                            </li>
-                            <li>
-                                <label>类型：</label>
-                                <select name="companyType" th:with="type=${@dict.getType('m_company_type')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
-                            <li>
-                                <label>公司代码：</label>
-                                <input type="text" name="code"/>
-                            </li>
-                            <li>
-                                <label>是否有效：</label>
-                                <select name="available" th:with="type=${@dict.getType('sys_yes_no')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
-                            <li>
-                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
-                            </li>
-                        </ul>
-                    </div>
-                </form>
-            </div>
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <label>公司名称：</label>
+                            <input type="text" name="name"/>
+                        </li>
 
-            <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:company:add">
-                    <i class="fa fa-plus"></i> 添加
-                </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:company:edit">
-                    <i class="fa fa-edit"></i> 修改
-                </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:company:remove">
-                    <i class="fa fa-remove"></i> 删除
-                </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:company:export">
-                    <i class="fa fa-download"></i> 导出
-                </a>
-            </div>
-            <div class="col-sm-12 select-table table-striped">
-                <table id="bootstrap-table"></table>
-            </div>
+                        <li>
+                            <label>是否为供应商：</label>
+                            <select name="isvendor" th:with="type=${@dict.getType('sys_yes_no')}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </li>
+                        <li>
+                            <label>公司代码：</label>
+                            <input type="text" name="code"/>
+                        </li>
+                        <li>
+                            <label>是否为客户：</label>
+                            <select name="iscustomer" th:with="type=${@dict.getType('sys_yes_no')}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </li>
+                        <li>
+                            <label>是否有效：</label>
+                            <select name="available" th:with="type=${@dict.getType('sys_yes_no')}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:company:add">
+                <i class="fa fa-plus"></i> 添加
+            </a>
+            <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:company:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:company:remove">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:company:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
         </div>
     </div>
-    <th:block th:include="include :: footer" />
-    <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:company:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:company:remove')}]];
-        var companyTypeDatas = [[${@dict.getType('m_company_type')}]];
-        var availableDatas = [[${@dict.getType('sys_yes_no')}]];
-        var prefix = ctx + "system/company";
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('system:company:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('system:company:remove')}]];
+    var companyTypeDatas = [[${@dict.getType('m_company_type')}]];
+    var isvendorDatas = [[${@dict.getType('sys_yes_no')}]];
+    var iscustomerDatas = [[${@dict.getType('sys_yes_no')}]];
+    var availableDatas = [[${@dict.getType('sys_yes_no')}]];
+    var prefix = ctx + "system/company";
 
-        $(function() {
-            var options = {
-                url: prefix + "/list",
-                createUrl: prefix + "/add",
-                updateUrl: prefix + "/edit/{id}",
-                removeUrl: prefix + "/remove",
-                exportUrl: prefix + "/export",
-                modalName: "公司",
-                columns: [{
-                    checkbox: true
-                },
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            modalName: "公司",
+            columns: [{
+                checkbox: true
+            },
                 {
                     field: 'id',
                     title: '',
@@ -88,22 +98,30 @@
                     field: 'name',
                     title: '公司名称'
                 },
-                {
-                    field: 'companyType',
-                    title: '类型',
-                    formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(companyTypeDatas, value);
-                    }
-                },
+
                 {
                     field: 'code',
                     title: '公司代码'
                 },
                 {
+                    field: 'isvendor',
+                    title: '是否为供应商',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(isvendorDatas, value);
+                    }
+                },
+                {
+                    field: 'iscustomer',
+                    title: '是否为客户',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(iscustomerDatas, value);
+                    }
+                },
+                {
                     field: 'available',
                     title: '是否有效',
                     formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(availableDatas, value);
+                        return $.table.selectDictLabel(availableDatas, value);
                     }
                 },
                 {
@@ -132,9 +150,9 @@
                         return actions.join('');
                     }
                 }]
-            };
-            $.table.init(options);
-        });
-    </script>
+        };
+        $.table.init(options);
+    });
+</script>
 </body>
 </html>

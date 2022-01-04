@@ -19,6 +19,8 @@ public interface ICompanyService
      */
     public Company selectCompanyById(Long id);
 
+    public List<Company> selectCustomerAll();
+
     public Company selectLastCode();
 
     public List<Company> selectVendorAll();

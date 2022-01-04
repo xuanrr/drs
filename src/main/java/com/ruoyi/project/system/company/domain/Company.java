@@ -22,13 +22,34 @@ public class Company extends BaseEntity
     @Excel(name = "公司名称")
     private String name;
 
-    /** 类型 */
-    @Excel(name = "类型")
-    private Long companyType;
 
     /** 公司代码 */
     @Excel(name = "公司代码")
     private String code;
+
+    public Long getIscustomer() {
+        return iscustomer;
+    }
+
+    public void setIscustomer(Long iscustomer) {
+        this.iscustomer = iscustomer;
+    }
+
+    public Long getIsvendor() {
+        return isvendor;
+    }
+
+    public void setIsvendor(Long isvendor) {
+        this.isvendor = isvendor;
+    }
+
+    /** 是否为客户 */
+    @Excel(name = "是否为客户")
+    private Long iscustomer;
+
+    /** 是否为供应商 */
+    @Excel(name = "是否为供应商")
+    private Long isvendor;
 
     /** 是否有效 */
     @Excel(name = "是否有效")
@@ -52,15 +73,7 @@ public class Company extends BaseEntity
     {
         return name;
     }
-    public void setCompanyType(Long companyType)
-    {
-        this.companyType = companyType;
-    }
 
-    public Long getCompanyType()
-    {
-        return companyType;
-    }
     public void setCode(String code)
     {
         this.code = code;
@@ -85,7 +98,6 @@ public class Company extends BaseEntity
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("name", getName())
-            .append("companyType", getCompanyType())
             .append("code", getCode())
             .append("remark", getRemark())
             .append("available", getAvailable())

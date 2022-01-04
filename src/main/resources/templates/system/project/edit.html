@@ -38,6 +38,15 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">客户:</label>
+                <div class="col-sm-8">
+                    <select id="customer" name="customer" class="form-control">
+                        <option th:each="customer:${customers}" th:value="${customer.id}" th:text="${customer.name}" ></option>
+                    </select>
+                </div>
+            </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">人天：</label>
                 <div class="col-sm-8">
@@ -53,6 +62,34 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">供应商:</label>
+                <div class="col-sm-8">
+                    <select id="vendor" name="vendor" class="form-control">
+                        <option th:each="vendor:${vendors}" th:value="${vendor.name}" th:text="${vendor.name}" ></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">委托方式：</label>
+                <div class="col-sm-8">
+                    <select id="entrustType" name="entrustType" th:with="type=${@dict.getType('m_entrust_type')}" class="form-control">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">供应商人天：</label>
+                <div class="col-sm-8">
+                    <input id="vendorManday" name="vendorManday" class="form-control" type="text">
+                </div>
+            </div>
+
             <div class="form-group">    
                 <label class="col-sm-3 control-label is-required">是否有效：</label>
                 <div class="col-sm-8">
@@ -60,6 +97,12 @@
                         <input type="radio" th:id="${'available_' + dict.dictCode}" name="available" th:value="${dict.dictValue}" th:field="*{available}" required>
                         <label th:for="${'available_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
                     </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <textarea name="remark" class="form-control">[[*{remark}]]</textarea>
                 </div>
             </div>
         </form>
@@ -74,7 +117,12 @@
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/edit", $('#form-project-edit').serialize());
+                var data = $("#form-project-edit").serializeArray();
+                var vendorName = $.form.selectSelects("vendor");
+                var customerId = $.form.selectSelects("customer");
+                data.push({"name": "vendorName", "value": vendorName});
+                data.push({"name": "customerId", "value": customerId});
+                $.operate.save(prefix + "/edit", data);
             }
         }
 
@@ -88,6 +136,18 @@
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true
+        });
+        $('input').on('ifChecked', function(event){
+            var vendorNeeded = $(event.target).val();
+            if (vendorNeeded == "0") {
+                $("#vendor").parents(".form-group").hide();
+                $("#entrustType").parents(".form-group").hide();
+                $("#vendorManday").parents(".form-group").hide();
+            }else if (vendorNeeded == "1") {
+                $("#vendor").parents(".form-group").show();
+                $("#entrustType").parents(".form-group").show();
+                $("#vendorManday").parents(".form-group").show();
+            }
         });
     </script>
 </body>
