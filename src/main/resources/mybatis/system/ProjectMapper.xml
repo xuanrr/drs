@@ -28,6 +28,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, code, name, start_date, end_date, customer_id, man_day, vendor_needed, entrust_type, vendor_name, available, create_by, vendor_manday, create_time, update_by, remark, update_time from m_project
     </sql>
 
+    <select id="selectAllProjectList" parameterType="Project" resultMap="ProjectResult">
+        select p.id, p.name, p.code,mc.name customerName, p.start_date, p.end_date, p.customer_id, p.man_day, p.vendor_needed, met.type entrustName, p.vendor_name, p.available, p.create_by,p.vendor_manday, p.create_time, p.update_by, p.update_time from m_project p
+        left join m_company mc on p.customer_id = mc.id
+        left join m_entrust_type met on met.code=p.entrust_type
+        group by customer_id
+    </select>
+
     <select id="selectProjectList" parameterType="Project" resultMap="ProjectResult">
         select p.id, p.name, p.code,mc.name customerName, p.start_date, p.end_date, p.customer_id, p.man_day, p.vendor_needed, met.type entrustName, p.vendor_name, p.available, p.create_by,p.vendor_manday, p.create_time, p.update_by, p.update_time from m_project p
         left join m_company mc on p.customer_id = mc.id

@@ -1,6 +1,8 @@
 package com.ruoyi.project.system.companydept.controller;
 
 import java.util.List;
+
+import com.ruoyi.project.system.project.service.IProjectService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,9 @@ public class CompanyDepController extends BaseController
 
     @Autowired
     private ICompanyDepService companyDepService;
+
+    @Autowired
+    private IProjectService projectService;
 
     @RequiresPermissions("system:companydept:view")
     @GetMapping()
@@ -72,8 +77,9 @@ public class CompanyDepController extends BaseController
      * 新增公司部门
      */
     @GetMapping("/add")
-    public String add()
+    public String add(ModelMap mmap)
     {
+        mmap.put("projects", projectService.selectAllProjectList());
         return prefix + "/add";
     }
 

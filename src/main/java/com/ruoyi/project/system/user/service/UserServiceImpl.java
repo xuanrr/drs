@@ -79,6 +79,11 @@ public class UserServiceImpl implements IUserService
         return userMapper.selectUserList(user);
     }
 
+    @Override
+    public List<User> selectNormalUserList() {
+        return userMapper.selectNormalUserList();
+    }
+
     /**
      * 根据条件分页查询已分配用户角色列表
      * 

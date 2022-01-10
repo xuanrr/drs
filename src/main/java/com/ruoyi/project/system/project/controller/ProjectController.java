@@ -3,6 +3,7 @@ package com.ruoyi.project.system.project.controller;
 import java.util.List;
 
 import com.ruoyi.project.system.company.service.ICompanyService;
+import com.ruoyi.project.system.user.service.IUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,9 @@ public class ProjectController extends BaseController
 
     @Autowired
     private ICompanyService companyService;
+
+    @Autowired
+    private IUserService userService;
 
     @RequiresPermissions("system:project:view")
     @GetMapping()
@@ -79,6 +83,7 @@ public class ProjectController extends BaseController
     @GetMapping("/add")
     public String add(ModelMap mmap)
     {
+//        mmap.put("users", userService.selectNormalUserList());
         mmap.put("vendors",companyService.selectVendorAll());
         mmap.put("customers",companyService.selectCustomerAll());
         return prefix + "/add";

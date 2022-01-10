@@ -1,8 +1,12 @@
 package com.ruoyi.project.system.companydept.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.CreateCodeUtils;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.system.companydept.mapper.CompanyDepMapper;
 import com.ruoyi.project.system.companydept.domain.CompanyDep;
@@ -21,6 +25,10 @@ public class CompanyDepServiceImpl implements ICompanyDepService
     @Autowired
     private CompanyDepMapper companyDepMapper;
 
+    @Autowired
+    @Lazy
+    private CreateCodeUtils createCodeUtils;
+
     /**
      * 查询公司部门
      * 
@@ -31,6 +39,11 @@ public class CompanyDepServiceImpl implements ICompanyDepService
     public CompanyDep selectCompanyDepByName(String name)
     {
         return companyDepMapper.selectCompanyDepByName(name);
+    }
+
+    @Override
+    public CompanyDep selectLastCode() {
+        return companyDepMapper.selectLastCode();
     }
 
     /**
@@ -54,7 +67,11 @@ public class CompanyDepServiceImpl implements ICompanyDepService
     @Override
     public int insertCompanyDep(CompanyDep companyDep)
     {
+        companyDep.setCode(createCodeUtils.createCompanyDepCode());
+        companyDep.setCreateBy(ShiroUtils.getLoginName());
         companyDep.setCreateTime(DateUtils.getNowDate());
+        companyDep.setUpdateTime(DateUtils.getNowDate());
+        companyDep.setUpdateBy(ShiroUtils.getLoginName());
         return companyDepMapper.insertCompanyDep(companyDep);
     }
 
@@ -68,6 +85,7 @@ public class CompanyDepServiceImpl implements ICompanyDepService
     public int updateCompanyDep(CompanyDep companyDep)
     {
         companyDep.setUpdateTime(DateUtils.getNowDate());
+        companyDep.setUpdateBy(ShiroUtils.getLoginName());
         return companyDepMapper.updateCompanyDep(companyDep);
     }
 

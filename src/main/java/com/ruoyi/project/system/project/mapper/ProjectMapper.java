@@ -28,6 +28,7 @@ public interface ProjectMapper
      * @return 项目集合
      */
     public List<Project> selectProjectList(Project project);
+    public List<Project> selectAllProjectList();
 
     /**
      * 新增项目

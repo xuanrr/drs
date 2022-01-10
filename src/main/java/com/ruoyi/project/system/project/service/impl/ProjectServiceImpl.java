@@ -34,6 +34,11 @@ public class ProjectServiceImpl implements IProjectService
         return projectMapper.selectProjectById(id);
     }
 
+    @Override
+    public List<Project> selectAllProjectList() {
+        return projectMapper.selectAllProjectList();
+    }
+
     /**
      * 查询项目列表
      * 

@@ -1,6 +1,8 @@
 package com.ruoyi.project.system.user.mapper;
 
 import com.ruoyi.project.system.user.domain.User;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
@@ -8,6 +10,7 @@ import java.util.List;
  * 
  * @author ruoyi
  */
+@Repository
 public interface UserMapper
 {
     /**
@@ -17,6 +20,8 @@ public interface UserMapper
      * @return 用户信息集合信息
      */
     public List<User> selectUserList(User user);
+
+    public List<User> selectNormalUserList();
 
     /**
      * 根据条件分页查询未已配用户角色列表

@@ -19,6 +19,7 @@ public interface IProjectService
      */
     public Project selectProjectById(Long id);
 
+    public List<Project> selectAllProjectList();
     /**
      * 查询项目列表
      * 

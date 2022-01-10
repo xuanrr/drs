@@ -77,7 +77,7 @@ public class CompanyServiceImpl implements ICompanyService
     @Override
     public int insertCompany(Company company)
     {
-        company.setCode(createCodeUtils.createCode());
+        company.setCode(createCodeUtils.createCompanyCode());
         company.setCreateBy(ShiroUtils.getLoginName());
         company.setCreateTime(DateUtils.getNowDate());
         company.setUpdateBy(ShiroUtils.getLoginName());

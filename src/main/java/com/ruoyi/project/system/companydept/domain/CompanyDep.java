@@ -14,6 +14,15 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 public class CompanyDep extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /** 部门名称 */
     @Excel(name = "部门名称")
@@ -22,6 +31,27 @@ public class CompanyDep extends BaseEntity
     /** 部门代码 */
     @Excel(name = "部门代码")
     private String code;
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
+    private int companyId;
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    @Excel(name = "公司名称")
+    private String companyName;
 
     public void setName(String name)
     {

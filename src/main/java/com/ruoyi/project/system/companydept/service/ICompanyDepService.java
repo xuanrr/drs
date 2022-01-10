@@ -1,6 +1,8 @@
 package com.ruoyi.project.system.companydept.service;
 
 import java.util.List;
+
+import com.ruoyi.project.system.company.domain.Company;
 import com.ruoyi.project.system.companydept.domain.CompanyDep;
 
 /**
@@ -18,6 +20,8 @@ public interface ICompanyDepService
      * @return 公司部门
      */
     public CompanyDep selectCompanyDepByName(String name);
+    public CompanyDep selectLastCode();
+
 
     /**
      * 查询公司部门列表

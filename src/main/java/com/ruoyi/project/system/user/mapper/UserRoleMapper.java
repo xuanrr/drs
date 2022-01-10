@@ -3,12 +3,14 @@ package com.ruoyi.project.system.user.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import com.ruoyi.project.system.user.domain.UserRole;
+import org.springframework.stereotype.Repository;
 
 /**
  * 用户与角色关联表 数据层
  * 
  * @author ruoyi
  */
+@Repository
 public interface UserRoleMapper
 {
     /**

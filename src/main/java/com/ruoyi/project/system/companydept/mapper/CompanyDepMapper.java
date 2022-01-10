@@ -1,7 +1,10 @@
 package com.ruoyi.project.system.companydept.mapper;
 
 import java.util.List;
+
+import com.ruoyi.project.system.company.domain.Company;
 import com.ruoyi.project.system.companydept.domain.CompanyDep;
+import org.springframework.stereotype.Repository;
 
 /**
  * 公司部门Mapper接口
@@ -9,6 +12,7 @@ import com.ruoyi.project.system.companydept.domain.CompanyDep;
  * @author zxy
  * @date 2022-01-04
  */
+@Repository
 public interface CompanyDepMapper 
 {
     /**
@@ -18,6 +22,8 @@ public interface CompanyDepMapper
      * @return 公司部门
      */
     public CompanyDep selectCompanyDepByName(String name);
+    public CompanyDep selectLastCode();
+
 
     /**
      * 查询公司部门列表
