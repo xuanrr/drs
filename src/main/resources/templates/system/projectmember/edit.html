@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改项目成员')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-projectmember-edit" th:object="${projectMember}">
+            <input name="userId" th:field="*{userId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">：</label>
+                <div class="col-sm-8">
+                    <input name="userId" th:field="*{userId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">：</label>
+                <div class="col-sm-8">
+                    <input name="projectId" th:field="*{projectId}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "system/projectmember";
+        $("#form-projectmember-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-projectmember-edit').serialize());
+            }
+        }
+    </script>
+</body>
+</html>
