@@ -3,6 +3,8 @@ package com.ruoyi.project.system.project.controller;
 import java.util.List;
 
 import com.ruoyi.project.system.company.service.ICompanyService;
+import com.ruoyi.project.system.project.domain.ProjectMember;
+import com.ruoyi.project.system.project.service.IProjectMemberService;
 import com.ruoyi.project.system.user.service.IUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,9 @@ public class ProjectController extends BaseController
 
     @Autowired
     private ICompanyService companyService;
+
+    @Autowired
+    private IProjectMemberService projectMemberService;
 
     @Autowired
     private IUserService userService;
@@ -96,9 +101,9 @@ public class ProjectController extends BaseController
     @Log(title = "项目", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Project project)
+    public AjaxResult addSave(Project project, ProjectMember projectMember)
     {
-        return toAjax(projectService.insertProject(project));
+        return toAjax(projectService.insertProject(project) & projectMemberService.insertProjectMember(projectMember));
     }
 
     /**
