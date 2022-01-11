@@ -37,11 +37,22 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">项目成员:</label>
+                <div class="col-sm-8">
+                    <select id="user" name="user" class="form-control">
+                        <option>请选择项目成员</option>
+                        <option th:each="user:${users}" th:value="${user.userId}" th:text="${user.userName}" ></option>
+                    </select>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label class="col-sm-3 control-label">客户:</label>
                 <div class="col-sm-8">
                     <select id="customer" name="customer" class="form-control">
-                        <option
+                        <option>请选择客户</option>
                         <option th:each="customer:${customers}" th:value="${customer.id}" th:text="${customer.name}" ></option>
                     </select>
                 </div>
@@ -58,7 +69,7 @@
                     <label class="radio-box">
                         <input type="radio" checked="" value="1" name="vendorNeeded">是</label>
                     <label class="radio-box">
-                        <input type="radio" value="0" name="vendorNeeded" >否</label>
+                        <input type="radio" value="0" name="vendorNeeded" th:selected="true">否</label>
                 </div>
             </div>
 
@@ -78,7 +89,7 @@
                 <label class="col-sm-3 control-label">委托方式：</label>
                 <div class="col-sm-8">
                     <select id="entrustType" name="entrustType" th:with="type=${@dict.getType('m_entrust_type')}" class="form-control">
-                        <option value="" selected>请选择委托方式</option>
+                        <option selected>请选择委托方式</option>
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                     </select>
                 </div>
@@ -123,7 +134,9 @@
                 var data = $("#form-project-add").serializeArray();
                 var vendorName = $.form.selectSelects("vendor");
                 var customerId = $.form.selectSelects("customer");
+                var userId = $.form.selectSelects("user");
                 data.push({"name": "vendorName", "value": vendorName});
+                data.push({"name": "userId", "value": userId});
                 data.push({"name": "customerId", "value": customerId});
                 $.operate.save(prefix + "/add", data);
             }
@@ -148,7 +161,7 @@
             });
         })
 
-        $('input').on('ifChecked', function(event){
+        $("input[name='vendorNeeded']").on('ifChecked', function(event){
             var vendorNeeded = $(event.target).val();
             if (vendorNeeded == "0") {
                 $("#vendor").parents(".form-group").hide();

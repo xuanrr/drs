@@ -41,9 +41,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateProjectMember" parameterType="ProjectMember">
         update m_project_member
         <trim prefix="SET" suffixOverrides=",">
+
+            <if test="userId != null">user_id = #{userId},</if>
             <if test="projectId != null">project_id = #{projectId},</if>
         </trim>
-        where user_id = #{userId}
+            where project_id = #{projectId}
     </update>
 
     <delete id="deleteProjectMemberByUserId" parameterType="Long">

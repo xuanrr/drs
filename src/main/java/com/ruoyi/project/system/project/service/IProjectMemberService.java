@@ -2,6 +2,7 @@ package com.ruoyi.project.system.project.service;
 
 import java.util.List;
 import com.ruoyi.project.system.project.domain.ProjectMember;
+import org.springframework.stereotype.Repository;
 
 /**
  * 项目成员Service接口
@@ -9,6 +10,7 @@ import com.ruoyi.project.system.project.domain.ProjectMember;
  * @author zxy
  * @date 2022-01-10
  */
+
 public interface IProjectMemberService 
 {
     /**

@@ -10,6 +10,8 @@ import java.util.List;
 public interface ProjectMemberRelMapper {
     public List<ProjectMemberRel> selectProjectMemberRelList(ProjectMemberRel projectMemberRel);
 
+    public ProjectMemberRel selectProjectMemberRelById(Long id);
+
     public int insertProjectMemberRel(ProjectMemberRel projectMemberRel);
 
     public int updateProjectMemberRel(ProjectMemberRel projectMemberRel);

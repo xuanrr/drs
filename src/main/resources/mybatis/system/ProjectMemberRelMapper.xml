@@ -23,9 +23,12 @@
         <result property="projectId"    column="project_id"    />
     </resultMap>
 
-    <select id="selectProjectMemberRelList" parameterType="ProjectMemberRel" resultMap="ProjectMemberRelResult">
-
+    <select id="selectProjectMemberRelById" parameterType="Long" resultMap="ProjectMemberRelResult">
+        select p.id,p.code,p.name,p.start_date,p.end_date,p.customer_id,p.man_day,p.vendor_needed,p.entrust_type,p.vendor_name,p.available,p.create_by,p.vendor_manday,p.create_time,p.update_by,p.remark,p.update_time,pm.user_id from m_project p
+        left join m_project_member pm on p.id=pm.project_id
+        where id=#{id}
     </select>
+
 
 
 <!--    <insert id="insertProjectMemberRel" parameterType="ProjectMemberRel" useGeneratedKeys="true" keyProperty="id">-->
@@ -73,15 +76,15 @@
 <!--        where id = #{id}-->
 <!--    </update>-->
 
-    <delete id="deleteCompanyById" parameterType="Long">
-        delete from m_company where id = #{id}
-    </delete>
+<!--    <delete id="deleteCompanyById" parameterType="Long">-->
+<!--        delete from m_company where id = #{id}-->
+<!--    </delete>-->
 
-    <delete id="deleteCompanyByIds" parameterType="String">
-        delete from m_company where id in
-        <foreach item="id" collection="array" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </delete>
+<!--    <delete id="deleteCompanyByIds" parameterType="String">-->
+<!--        delete from m_company where id in-->
+<!--        <foreach item="id" collection="array" open="(" separator="," close=")">-->
+<!--            #{id}-->
+<!--        </foreach>-->
+<!--    </delete>-->
 
 </mapper>
