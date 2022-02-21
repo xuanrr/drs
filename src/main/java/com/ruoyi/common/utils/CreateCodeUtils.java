@@ -37,27 +37,23 @@ public class CreateCodeUtils {
 
         int companyCode= Integer.parseInt(result)+1;//取到后四位整数
 
-//        ICompanyService companyService;
-//        String s = companyService.selectLastCode();
-        String j = new String();
-
         int digitNum=0;
         int temp=companyCode;
         while (temp!=0){
             temp/=10;
             digitNum++;
         }
-        String flowNum=companyCode+"";
-        //加0
+        String flowNum=companyCode+"";//加0
+
         for(int i=0;i<=3-digitNum;i++){
             String zero="0";
             flowNum=zero+flowNum;
         }
 
         SimpleDateFormat format = new SimpleDateFormat("yyMM"); // 时间字符串产生方式
-        String uid_pfix = format.format(new Date()); // 组合流水号前一部分，时间字符串，如：1601
+        String uid_pfix = format.format(new Date()); // 组合流水号时间字符串部分
 
-        j="C"+uid_pfix+flowNum;
+        String j="C"+uid_pfix+flowNum;
         return j;
     }
 
@@ -70,27 +66,23 @@ public class CreateCodeUtils {
 
         int companyCode= Integer.parseInt(result)+1;//取到后四位整数
 
-//        ICompanyService companyService;
-//        String s = companyService.selectLastCode();
-        String j = new String();
-
         int digitNum=0;
         int temp=companyCode;
         while (temp!=0){
             temp/=10;
             digitNum++;
         }
-        String flowNum=companyCode+"";
-        //加0
+        String flowNum=companyCode+"";//加0
+
         for(int i=0;i<=3-digitNum;i++){
             String zero="0";
             flowNum=zero+flowNum;
         }
 
         SimpleDateFormat format = new SimpleDateFormat("yyMM"); // 时间字符串产生方式
-        String uid_pfix = format.format(new Date()); // 组合流水号前一部分，时间字符串，如：1601
+        String uid_pfix = format.format(new Date()); // 组合流水号时间字符串部分
 
-        j="D"+uid_pfix+flowNum;
+        String j="D"+uid_pfix+flowNum;
         return j;
     }
 }
