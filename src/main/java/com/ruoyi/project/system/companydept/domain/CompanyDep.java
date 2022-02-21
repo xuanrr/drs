@@ -9,20 +9,14 @@ import com.ruoyi.framework.web.domain.BaseEntity;
  * 公司部门对象 m_company_dep
  * 
  * @author zxy
- * @date 2022-01-04
+ * @date 2022-02-21
  */
 public class CompanyDep extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
+
+    /** 部门id */
     private Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /** 部门名称 */
     @Excel(name = "部门名称")
@@ -32,27 +26,19 @@ public class CompanyDep extends BaseEntity
     @Excel(name = "部门代码")
     private String code;
 
-    public int getCompanyId() {
-        return companyId;
+    /**  */
+    @Excel(name = "")
+    private Long companyId;
+
+    public void setId(Long id)
+    {
+        this.id = id;
     }
 
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
+    public Long getId()
+    {
+        return id;
     }
-
-    private int companyId;
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    @Excel(name = "公司名称")
-    private String companyName;
-
     public void setName(String name)
     {
         this.name = name;
@@ -71,12 +57,23 @@ public class CompanyDep extends BaseEntity
     {
         return code;
     }
+    public void setCompanyId(Long companyId)
+    {
+        this.companyId = companyId;
+    }
+
+    public Long getCompanyId()
+    {
+        return companyId;
+    }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("id", getId())
             .append("name", getName())
             .append("code", getCode())
+            .append("companyId", getCompanyId())
             .append("createTime", getCreateTime())
             .append("createBy", getCreateBy())
             .append("updateTime", getUpdateTime())

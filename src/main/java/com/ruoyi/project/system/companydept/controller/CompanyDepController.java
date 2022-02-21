@@ -1,8 +1,6 @@
 package com.ruoyi.project.system.companydept.controller;
 
 import java.util.List;
-
-import com.ruoyi.project.system.project.service.IProjectService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +23,7 @@ import com.ruoyi.framework.web.page.TableDataInfo;
  * 公司部门Controller
  * 
  * @author zxy
- * @date 2022-01-04
+ * @date 2022-02-21
  */
 @Controller
 @RequestMapping("/system/companydept")
@@ -35,9 +33,6 @@ public class CompanyDepController extends BaseController
 
     @Autowired
     private ICompanyDepService companyDepService;
-
-    @Autowired
-    private IProjectService projectService;
 
     @RequiresPermissions("system:companydept:view")
     @GetMapping()
@@ -77,9 +72,8 @@ public class CompanyDepController extends BaseController
      * 新增公司部门
      */
     @GetMapping("/add")
-    public String add(ModelMap mmap)
+    public String add()
     {
-        mmap.put("projects", projectService.selectAllProjectList());
         return prefix + "/add";
     }
 
@@ -99,10 +93,10 @@ public class CompanyDepController extends BaseController
      * 修改公司部门
      */
     @RequiresPermissions("system:companydept:edit")
-    @GetMapping("/edit/{name}")
-    public String edit(@PathVariable("name") String name, ModelMap mmap)
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
-        CompanyDep companyDep = companyDepService.selectCompanyDepByName(name);
+        CompanyDep companyDep = companyDepService.selectCompanyDepById(id);
         mmap.put("companyDep", companyDep);
         return prefix + "/edit";
     }
@@ -128,6 +122,6 @@ public class CompanyDepController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(companyDepService.deleteCompanyDepByNames(ids));
+        return toAjax(companyDepService.deleteCompanyDepByIds(ids));
     }
 }

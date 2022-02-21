@@ -1,27 +1,23 @@
 package com.ruoyi.project.system.companydept.service;
 
 import java.util.List;
-
-import com.ruoyi.project.system.company.domain.Company;
 import com.ruoyi.project.system.companydept.domain.CompanyDep;
 
 /**
  * 公司部门Service接口
  * 
  * @author zxy
- * @date 2022-01-04
+ * @date 2022-02-21
  */
 public interface ICompanyDepService 
 {
     /**
      * 查询公司部门
      * 
-     * @param name 公司部门主键
+     * @param id 公司部门主键
      * @return 公司部门
      */
-    public CompanyDep selectCompanyDepByName(String name);
-    public CompanyDep selectLastCode();
-
+    public CompanyDep selectCompanyDepById(Long id);
 
     /**
      * 查询公司部门列表
@@ -50,16 +46,18 @@ public interface ICompanyDepService
     /**
      * 批量删除公司部门
      * 
-     * @param names 需要删除的公司部门主键集合
+     * @param ids 需要删除的公司部门主键集合
      * @return 结果
      */
-    public int deleteCompanyDepByNames(String names);
+    public int deleteCompanyDepByIds(String ids);
 
     /**
      * 删除公司部门信息
      * 
-     * @param name 公司部门主键
+     * @param id 公司部门主键
      * @return 结果
      */
-    public int deleteCompanyDepByName(String name);
+    public int deleteCompanyDepById(Long id);
+
+    public CompanyDep selectLastCode();
 }

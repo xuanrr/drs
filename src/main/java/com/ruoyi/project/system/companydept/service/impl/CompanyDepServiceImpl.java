@@ -17,7 +17,7 @@ import com.ruoyi.common.utils.text.Convert;
  * 公司部门Service业务层处理
  * 
  * @author zxy
- * @date 2022-01-04
+ * @date 2022-02-21
  */
 @Service
 public class CompanyDepServiceImpl implements ICompanyDepService 
@@ -32,18 +32,13 @@ public class CompanyDepServiceImpl implements ICompanyDepService
     /**
      * 查询公司部门
      * 
-     * @param name 公司部门主键
+     * @param id 公司部门主键
      * @return 公司部门
      */
     @Override
-    public CompanyDep selectCompanyDepByName(String name)
+    public CompanyDep selectCompanyDepById(Long id)
     {
-        return companyDepMapper.selectCompanyDepByName(name);
-    }
-
-    @Override
-    public CompanyDep selectLastCode() {
-        return companyDepMapper.selectLastCode();
+        return companyDepMapper.selectCompanyDepById(id);
     }
 
     /**
@@ -67,11 +62,11 @@ public class CompanyDepServiceImpl implements ICompanyDepService
     @Override
     public int insertCompanyDep(CompanyDep companyDep)
     {
-        companyDep.setCode(createCodeUtils.createCompanyDepCode());
+        companyDep.setUpdateBy(ShiroUtils.getLoginName());
         companyDep.setCreateBy(ShiroUtils.getLoginName());
         companyDep.setCreateTime(DateUtils.getNowDate());
         companyDep.setUpdateTime(DateUtils.getNowDate());
-        companyDep.setUpdateBy(ShiroUtils.getLoginName());
+        companyDep.setCode(createCodeUtils.createCompanyDepCode());
         return companyDepMapper.insertCompanyDep(companyDep);
     }
 
@@ -84,32 +79,37 @@ public class CompanyDepServiceImpl implements ICompanyDepService
     @Override
     public int updateCompanyDep(CompanyDep companyDep)
     {
-        companyDep.setUpdateTime(DateUtils.getNowDate());
         companyDep.setUpdateBy(ShiroUtils.getLoginName());
+        companyDep.setUpdateTime(DateUtils.getNowDate());
         return companyDepMapper.updateCompanyDep(companyDep);
     }
 
     /**
      * 批量删除公司部门
      * 
-     * @param names 需要删除的公司部门主键
+     * @param ids 需要删除的公司部门主键
      * @return 结果
      */
     @Override
-    public int deleteCompanyDepByNames(String names)
+    public int deleteCompanyDepByIds(String ids)
     {
-        return companyDepMapper.deleteCompanyDepByNames(Convert.toStrArray(names));
+        return companyDepMapper.deleteCompanyDepByIds(Convert.toStrArray(ids));
     }
 
     /**
      * 删除公司部门信息
      * 
-     * @param name 公司部门主键
+     * @param id 公司部门主键
      * @return 结果
      */
     @Override
-    public int deleteCompanyDepByName(String name)
+    public int deleteCompanyDepById(Long id)
     {
-        return companyDepMapper.deleteCompanyDepByName(name);
+        return companyDepMapper.deleteCompanyDepById(id);
+    }
+
+    @Override
+    public CompanyDep selectLastCode() {
+        return companyDepMapper.selectLastCode();
     }
 }

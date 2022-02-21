@@ -7,9 +7,9 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 运维类型对象 m_develop_type
- * 
+ *
  * @author zxy
- * @date 2022-01-04
+ * @date 2022-02-21
  */
 public class DevelopType extends BaseEntity
 {
@@ -18,6 +18,9 @@ public class DevelopType extends BaseEntity
     /** 运维类型名称 */
     @Excel(name = "运维类型名称")
     private String name;
+
+    /** 运维id */
+    private Long id;
 
     /** 运维类型代码 */
     @Excel(name = "运维类型代码")
@@ -39,6 +42,15 @@ public class DevelopType extends BaseEntity
     public String getName()
     {
         return name;
+    }
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
+
+    public Long getId()
+    {
+        return id;
     }
     public void setCode(String code)
     {
@@ -71,15 +83,16 @@ public class DevelopType extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("name", getName())
-            .append("code", getCode())
-            .append("sort", getSort())
-            .append("remark", getRemark())
-            .append("available", getAvailable())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .toString();
+                .append("name", getName())
+                .append("id", getId())
+                .append("code", getCode())
+                .append("sort", getSort())
+                .append("remark", getRemark())
+                .append("available", getAvailable())
+                .append("createBy", getCreateBy())
+                .append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy())
+                .append("updateTime", getUpdateTime())
+                .toString();
     }
 }

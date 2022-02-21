@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.project.system.developtype.mapper.DevelopTypeMapper">
-    
+
     <resultMap type="DevelopType" id="DevelopTypeResult">
         <result property="name"    column="name"    />
+        <result property="id"    column="id"    />
         <result property="code"    column="code"    />
         <result property="sort"    column="sort"    />
         <result property="remark"    column="remark"    />
@@ -17,12 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDevelopTypeVo">
-        select name, code, sort, remark, available, create_by, create_time, update_by, update_time from m_develop_type
+        select name, id, code, sort, remark, available, create_by, create_time, update_by, update_time from m_develop_type
     </sql>
 
     <select id="selectDevelopTypeList" parameterType="DevelopType" resultMap="DevelopTypeResult">
         <include refid="selectDevelopTypeVo"/>
-        <where>  
+        <where>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="sort != null "> and sort = #{sort}</if>
@@ -32,18 +33,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
             <if test="updateTime != null "> and update_time = #{updateTime}</if>
         </where>
-        order by sort desc
     </select>
-    
+
     <select id="selectDevelopTypeByName" parameterType="String" resultMap="DevelopTypeResult">
         <include refid="selectDevelopTypeVo"/>
         where name = #{name}
     </select>
-        
+
     <insert id="insertDevelopType" parameterType="DevelopType">
         insert into m_develop_type
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null and name != ''">name,</if>
+            <if test="id != null">id,</if>
             <if test="code != null and code != ''">code,</if>
             <if test="sort != null">sort,</if>
             <if test="remark != null">remark,</if>
@@ -52,9 +53,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null and name != ''">#{name},</if>
+            <if test="id != null">#{id},</if>
             <if test="code != null and code != ''">#{code},</if>
             <if test="sort != null">#{sort},</if>
             <if test="remark != null">#{remark},</if>
@@ -63,12 +65,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateDevelopType" parameterType="DevelopType">
         update m_develop_type
         <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null">id = #{id},</if>
             <if test="code != null and code != ''">code = #{code},</if>
             <if test="sort != null">sort = #{sort},</if>
             <if test="remark != null">remark = #{remark},</if>
@@ -86,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteDevelopTypeByNames" parameterType="String">
-        delete from m_develop_type where name in 
+        delete from m_develop_type where name in
         <foreach item="name" collection="array" open="(" separator="," close=")">
             #{name}
         </foreach>
