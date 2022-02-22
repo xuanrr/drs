@@ -3,6 +3,7 @@
 <head>
     <th:block th:include="include :: header('修改项目')" />
     <th:block th:include="include :: datetimepicker-css" />
+    <th:block th:include="include :: select2-css" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -42,9 +43,8 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">项目成员:</label>
                 <div class="col-sm-8">
-                    <select id="user" name="user" class="form-control">
-                        <option>请选择项目成员</option>
-                        <option th:each="user:${users}" th:value="${user.userId}" th:text="${user.userName}" ></option>
+                    <select id="user" class="form-control select2-multiple" multiple>
+                        <option th:each="user:${users}" th:value="${user.userId}" th:text="${user.userName}" th:selected="${user.flag}" ></option>
                     </select>
                 </div>
             </div>
@@ -93,8 +93,6 @@
                 </div>
             </div>
 
-
-
             <div class="form-group">
                 <label class="col-sm-3 control-label">供应商人天：</label>
                 <div class="col-sm-8">
@@ -121,6 +119,8 @@
     </div>
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: datetimepicker-js" />
+    <th:block th:include="include :: select2-js" />
+
     <script th:inline="javascript">
         var prefix = ctx + "system/project";
         $("#form-project-edit").validate({
@@ -129,12 +129,12 @@
 
         function submitHandler() {
             if ($.validate.form()) {
-                var data = $("#form-project-edit").serializeArray();
+                var data = $("#form-project-add").serializeArray();
                 var vendorName = $.form.selectSelects("vendor");
                 var customerId = $.form.selectSelects("customer");
-                var userId = $.form.selectSelects("user");
+                var userIds = $.form.selectSelects("user");
                 data.push({"name": "vendorName", "value": vendorName});
-                data.push({"name": "userId", "value": userId});
+                data.push({"name": "userIds", "value": userIds});
                 data.push({"name": "customerId", "value": customerId});
                 $.operate.save(prefix + "/edit", data);
             }
@@ -163,6 +163,13 @@
                 $("#vendorManday").parents(".form-group").show();
             }
         });
+
+        $(function() {
+            $('#user').select2({
+                placeholder: "请选择项目成员",
+                allowClear: true
+            });
+        })
     </script>
 </body>
 </html>

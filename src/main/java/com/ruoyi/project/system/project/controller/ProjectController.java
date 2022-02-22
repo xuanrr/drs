@@ -4,9 +4,6 @@ import java.util.List;
 
 import com.ruoyi.project.system.company.service.ICompanyService;
 import com.ruoyi.project.system.project.domain.ProjectMember;
-import com.ruoyi.project.system.project.domain.ProjectMemberRel;
-import com.ruoyi.project.system.project.service.IProjectMemberRelService;
-import com.ruoyi.project.system.project.service.IProjectMemberService;
 import com.ruoyi.project.system.user.service.IUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +41,6 @@ public class ProjectController extends BaseController
     @Autowired
     private ICompanyService companyService;
 
-    @Autowired
-    private IProjectMemberRelService projectMemberRelService;
 
     @Autowired
     private IUserService userService;
@@ -103,9 +98,9 @@ public class ProjectController extends BaseController
     @Log(title = "项目", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(ProjectMemberRel projectMemberRel)
+    public AjaxResult addSave(Project project)
     {
-        return toAjax(projectMemberRelService.insertProjectMemberRel(projectMemberRel));
+        return toAjax(projectService.insertProject(project));
     }
 
     /**
@@ -115,11 +110,11 @@ public class ProjectController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
-        ProjectMemberRel projectMemberRel = projectMemberRelService.selectProjectMemberRelById(id);
-        mmap.put("users", userService.selectNormalUserList());
+        Project project = projectService.selectProjectById(id);
+        mmap.put("users", userService.selectUsersByProjectId(id));
         mmap.put("vendors",companyService.selectVendorAll());
         mmap.put("customers",companyService.selectCustomerAll());
-        mmap.put("project", projectMemberRel);
+        mmap.put("project", project);
         return prefix + "/edit";
     }
 
@@ -130,9 +125,9 @@ public class ProjectController extends BaseController
     @Log(title = "项目", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(ProjectMemberRel projectMemberRel)
+    public AjaxResult editSave(Project project)
     {
-        return toAjax(projectMemberRelService.updateProjectMemberRel(projectMemberRel));
+        return toAjax(projectService.updateProject(project));
     }
 
     /**

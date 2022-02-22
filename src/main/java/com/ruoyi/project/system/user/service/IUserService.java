@@ -1,5 +1,6 @@
 package com.ruoyi.project.system.user.service;
 
+import com.ruoyi.project.system.post.domain.Post;
 import com.ruoyi.project.system.user.domain.User;
 import com.ruoyi.project.system.user.domain.UserRole;
 import java.util.List;
@@ -19,6 +20,11 @@ public interface IUserService
      */
     public List<User> selectUserList(User user);
 
+
+    /**
+     * 查询非管理员用户
+     * @return 用户信息集合信息
+     */
     public List<User> selectNormalUserList();
 
 
@@ -62,6 +68,8 @@ public interface IUserService
      */
     public User selectUserByEmail(String email);
 
+
+
     /**
      * 通过用户ID查询用户
      * 
@@ -70,6 +78,13 @@ public interface IUserService
      */
     public User selectUserById(Long userId);
 
+    /**
+     * 根据用户ID查询岗位
+     *
+     * @param projectId 项目ID
+     * @return 用户列表
+     */
+    public List<User> selectUsersByProjectId(Long projectId);
     /**
      * 通过用户ID查询用户和角色关联
      * 

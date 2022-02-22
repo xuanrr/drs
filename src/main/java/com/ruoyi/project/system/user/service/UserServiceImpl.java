@@ -147,6 +147,30 @@ public class UserServiceImpl implements IUserService
     }
 
     /**
+     * 根据用户ID查询岗位
+     *
+     * @param projectId 用户ID
+     * @return 岗位列表
+     */
+    @Override
+    public List<User> selectUsersByProjectId(Long projectId)
+    {
+        List<User> projectMembers = userMapper.selectUsersByProjectId(projectId);
+        List<User> users = userMapper.selectNormalUserList();
+        for (User user : users)
+        {
+            for (User projectMember : projectMembers)
+            {
+                if (projectMember.getUserId().longValue() == projectMember.getUserId().longValue())
+                {
+                    user.setFlag(true);
+                    break;
+                }
+            }
+        }
+        return users;
+    }
+    /**
      * 通过用户ID查询用户
      * 
      * @param userId 用户ID

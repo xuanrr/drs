@@ -21,6 +21,8 @@ public interface UserMapper
      */
     public List<User> selectUserList(User user);
 
+    public List<User> selectUsersByProjectId(Long projectId);
+
     public List<User> selectNormalUserList();
 
     /**

@@ -29,7 +29,7 @@ public class Project extends BaseEntity
     private String code;
 
     /** 成员组 */
-    private long[] postIds;
+    private Long[] userIds;
 
 
 
@@ -197,12 +197,12 @@ public class Project extends BaseEntity
         return available;
     }
 
-    public long[] getPostIds() {
-        return postIds;
+    public Long[] getUserIds() {
+        return userIds;
     }
 
-    public void setPostIds(long[] postIds) {
-        this.postIds = postIds;
+    public void setUserIds(Long[] userIds) {
+        this.userIds = userIds;
     }
 
     @Override

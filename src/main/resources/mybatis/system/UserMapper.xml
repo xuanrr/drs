@@ -87,6 +87,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${params.dataScope}
 	</select>
 
+	<select id="selectUsersByProjectId" parameterType="Long" resultMap="UserResult">
+		SELECT u.user_id, u.user_name
+		FROM sys_user u
+				 LEFT JOIN m_project_member pm ON u.user_id = pm.user_id
+				 LEFT JOIN m_project p ON p.id = pm.project_id
+		WHERE p.id = #{projectId}
+	</select>
+
 	<select id="selectNormalUserList" parameterType="User" resultMap="UserResult">
 		select u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
 		left join sys_dept d on u.dept_id = d.dept_id

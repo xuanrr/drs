@@ -48,6 +48,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             where project_id = #{projectId}
     </update>
 
+    <delete id="deleteProjectMember" parameterType="Long">
+        delete from m_project_member where project_id in
+        <foreach collection="array" item="projectId" open="(" separator="," close=")">
+            #{projectId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteProjectMemberByProjectId" parameterType="Long">
+        delete from m_project_member where project_id= #{projectId}
+    </delete>
+
     <delete id="deleteProjectMemberByUserId" parameterType="Long">
         delete from m_project_member where user_id = #{userId}
     </delete>
@@ -58,5 +69,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{userId}
         </foreach>
     </delete>
+
+
+    <insert id="batchProjectMember">
+        insert into m_project_member(project_id, user_id) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.projectId},#{item.userId})
+        </foreach>
+    </insert>
 
 </mapper>

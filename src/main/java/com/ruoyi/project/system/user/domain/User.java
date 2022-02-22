@@ -104,6 +104,16 @@ public class User extends BaseEntity
     /** 岗位组 */
     private Long[] postIds;
 
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    private boolean flag = false;
+
     public User()
     {
 
