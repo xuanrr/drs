@@ -129,7 +129,7 @@
 
         function submitHandler() {
             if ($.validate.form()) {
-                var data = $("#form-project-add").serializeArray();
+                var data = $("#form-project-edit").serializeArray();
                 var vendorName = $.form.selectSelects("vendor");
                 var customerId = $.form.selectSelects("customer");
                 var userIds = $.form.selectSelects("user");

@@ -161,7 +161,7 @@ public class UserServiceImpl implements IUserService
         {
             for (User projectMember : projectMembers)
             {
-                if (projectMember.getUserId().longValue() == projectMember.getUserId().longValue())
+                if (user.getUserId().longValue() == projectMember.getUserId().longValue())
                 {
                     user.setFlag(true);
                     break;
