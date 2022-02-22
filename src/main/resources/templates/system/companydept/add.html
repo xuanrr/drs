@@ -12,6 +12,15 @@
                     <input name="name" class="form-control" type="text" required>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">所属公司：</label>
+                <div class="col-sm-8">
+                    <select id="company" name="company" class="form-control">
+                        <option>请选择所属公司</option>
+                        <option th:each="company:${companies}" th:value="${company.id}" th:text="${company.name}" ></option>
+                    </select>
+                </div>
+            </div>
         </form>
     </div>
     <th:block th:include="include :: footer" />
@@ -23,7 +32,10 @@
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/add", $('#form-companydept-add').serialize());
+                var data = $("#form-companydept-add").serializeArray();
+                var companyId = $.form.selectSelects("company");
+                data.push({"name": "companyId", "value": companyId});
+                $.operate.save(prefix + "/add", data);
             }
         }
     </script>

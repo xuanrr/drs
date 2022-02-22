@@ -22,6 +22,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, name, isvendor, code, iscustomer, remark, available, create_by, create_time, update_by, update_time from m_company
     </sql>
 
+    <select id="selectCompaniesAll" resultMap="CompanyResult">
+        select * from m_company
+    </select>
+
     <select id="selectCompanyList" parameterType="Company" resultMap="CompanyResult">
         <include refid="selectCompanyVo"/>
         <where>

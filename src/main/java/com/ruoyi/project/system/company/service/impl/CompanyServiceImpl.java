@@ -42,6 +42,11 @@ public class CompanyServiceImpl implements ICompanyService
     }
 
     @Override
+    public List<Company> selectCompaniesAll() {
+        return companyMapper.selectCompaniesAll();
+    }
+
+    @Override
     public List<Company> selectCustomerAll() {
         return companyMapper.selectCustomerAll();
     }

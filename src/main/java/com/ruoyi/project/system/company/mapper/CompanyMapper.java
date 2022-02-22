@@ -21,6 +21,7 @@ public interface CompanyMapper
      */
     public Company selectCompanyById(Long id);
 
+    public List<Company> selectCompaniesAll();
     public List<Company> selectVendorAll();
     public List<Company> selectCustomerAll();
     /**
