@@ -28,6 +28,9 @@ public class Project extends BaseEntity
     @Excel(name = "项目代码")
     private String code;
 
+    /** 成员组 */
+    private long[] postIds;
+
 
 
     /** 开始时间 */
@@ -192,6 +195,14 @@ public class Project extends BaseEntity
     public Long getAvailable()
     {
         return available;
+    }
+
+    public long[] getPostIds() {
+        return postIds;
+    }
+
+    public void setPostIds(long[] postIds) {
+        this.postIds = postIds;
     }
 
     @Override

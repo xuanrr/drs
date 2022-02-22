@@ -2,6 +2,7 @@ package com.ruoyi.project.system.project.mapper;
 
 import java.util.List;
 import com.ruoyi.project.system.project.domain.ProjectMember;
+import com.ruoyi.project.system.user.domain.UserPost;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,50 +15,34 @@ import org.springframework.stereotype.Repository;
 public interface ProjectMemberMapper 
 {
     /**
-     * 查询项目成员
-     * 
-     * @param userId 项目成员主键
-     * @return 项目成员
-     */
-    public ProjectMember selectProjectMemberByUserId(Long userId);
-
-    /**
-     * 查询项目成员列表
-     * 
-     * @param projectMember 项目成员
-     * @return 项目成员集合
-     */
-    public List<ProjectMember> selectProjectMemberList(ProjectMember projectMember);
-
-    /**
-     * 新增项目成员
-     * 
-     * @param projectMember 项目成员
+     * 通过项目ID删除项目和成员关联
+     *
+     * @param projectId 项目ID
      * @return 结果
      */
-    public int insertProjectMember(ProjectMember projectMember);
+    public int deleteProjectMemberByProjectId(Long projectId);
+
+//    /**
+//     * 通过岗位ID查询岗位使用数量
+//     *
+//     * @param postId 岗位ID
+//     * @return 结果
+//     */
+//    public int countProjectMemberById(Long postId);
 
     /**
-     * 修改项目成员
-     * 
-     * @param projectMember 项目成员
+     * 批量删除项目和成员
+     *
+     * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int updateProjectMember(ProjectMember projectMember);
+    public int deleteProjectMember(Long[] ids);
 
     /**
-     * 删除项目成员
-     * 
-     * @param userId 项目成员主键
+     * 批量新增项目成员信息
+     *
+     * @param memberList 成员列表
      * @return 结果
      */
-    public int deleteProjectMemberByUserId(Long userId);
-
-    /**
-     * 批量删除项目成员
-     * 
-     * @param userIds 需要删除的数据主键集合
-     * @return 结果
-     */
-    public int deleteProjectMemberByUserIds(String[] userIds);
+    public int batchProjectMember(List<ProjectMember> memberList);
 }
