@@ -134,6 +134,13 @@ create table m_project
         unique (code)
 );
 
+create table m_project_member
+(
+    user_id    bigint not null,
+    project_id int    not null,
+    primary key (user_id, project_id)
+);
+
 create table qrtz_calendars
 (
     sched_name    varchar(120) not null comment '调度名称',
@@ -549,18 +556,6 @@ create table sys_user
     remark          varchar(500)              null comment '备注'
 )
     comment '用户信息表';
-
-create table m_project_member
-(
-    user_id    bigint not null,
-    project_id int    null,
-    constraint pk
-        unique (user_id, project_id),
-    constraint m_project_member_m_project_id_fk
-        foreign key (project_id) references m_project (id),
-    constraint m_project_member_sys_user_user_id_fk
-        foreign key (user_id) references sys_user (user_id)
-);
 
 create table sys_user_online
 (
