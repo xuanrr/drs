@@ -18,14 +18,8 @@ public class CreateCodeUtils {
      @Autowired
      ICompanyService companyService;
      @Autowired
-    ICompanyDepService companyDepService;
-//     Company company = companyService.selectLastCode();
-//     String s =company.getCode();
-//
-//     String result = s.substring(s.length()-4,s.length());
-//
-//
-//     int companyCode= Integer.parseInt(result);
+     ICompanyDepService companyDepService;
+
 
 
     public  String createCompanyCode(){

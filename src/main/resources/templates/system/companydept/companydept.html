@@ -19,10 +19,6 @@
                                 <input type="text" name="code"/>
                             </li>
                             <li>
-                                <label>：</label>
-                                <input type="text" name="companyId"/>
-                            </li>
-                            <li>
                                 <label>创建时间：</label>
                                 <input type="text" class="time-input" placeholder="请选择创建时间" name="createTime"/>
                             </li>
@@ -83,11 +79,11 @@
                 columns: [{
                     checkbox: true
                 },
-                // {
-                //     field: 'id',
-                //     title: '部门id',
-                //     visible: false
-                // },
+                {
+                    field: 'id',
+                    title: '部门id',
+                    visible: false
+                },
                 {
                     field: 'name',
                     title: '部门名称'
@@ -97,8 +93,8 @@
                     title: '部门代码'
                 },
                 {
-                    field: 'companyId',
-                    title: ''
+                    field: 'companyName',
+                    title: '所属公司'
                 },
                 {
                     field: 'createTime',

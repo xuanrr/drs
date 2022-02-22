@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * 公司部门Mapper接口
  * 
  * @author zxy
- * @date 2022-02-21
+ * @date 2022-02-22
  */
 @Repository
 public interface CompanyDepMapper 
@@ -22,7 +22,6 @@ public interface CompanyDepMapper
     public CompanyDep selectCompanyDepById(Long id);
 
     public CompanyDep selectLastCode();
-
     /**
      * 查询公司部门列表
      * 

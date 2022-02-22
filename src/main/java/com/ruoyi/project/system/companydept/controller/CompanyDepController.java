@@ -23,7 +23,7 @@ import com.ruoyi.framework.web.page.TableDataInfo;
  * 公司部门Controller
  * 
  * @author zxy
- * @date 2022-02-21
+ * @date 2022-02-22
  */
 @Controller
 @RequestMapping("/system/companydept")

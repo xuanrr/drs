@@ -17,7 +17,7 @@ import com.ruoyi.common.utils.text.Convert;
  * 公司部门Service业务层处理
  * 
  * @author zxy
- * @date 2022-02-21
+ * @date 2022-02-22
  */
 @Service
 public class CompanyDepServiceImpl implements ICompanyDepService 
@@ -41,6 +41,11 @@ public class CompanyDepServiceImpl implements ICompanyDepService
         return companyDepMapper.selectCompanyDepById(id);
     }
 
+    @Override
+    public CompanyDep selectLastCode() {
+        return companyDepMapper.selectLastCode();
+    }
+
     /**
      * 查询公司部门列表
      * 
@@ -62,11 +67,11 @@ public class CompanyDepServiceImpl implements ICompanyDepService
     @Override
     public int insertCompanyDep(CompanyDep companyDep)
     {
-        companyDep.setUpdateBy(ShiroUtils.getLoginName());
-        companyDep.setCreateBy(ShiroUtils.getLoginName());
+        companyDep.setCode(createCodeUtils.createCompanyDepCode());
         companyDep.setCreateTime(DateUtils.getNowDate());
         companyDep.setUpdateTime(DateUtils.getNowDate());
-        companyDep.setCode(createCodeUtils.createCompanyDepCode());
+        companyDep.setCreateBy(ShiroUtils.getLoginName());
+        companyDep.setUpdateBy(ShiroUtils.getLoginName());
         return companyDepMapper.insertCompanyDep(companyDep);
     }
 
@@ -79,8 +84,8 @@ public class CompanyDepServiceImpl implements ICompanyDepService
     @Override
     public int updateCompanyDep(CompanyDep companyDep)
     {
-        companyDep.setUpdateBy(ShiroUtils.getLoginName());
         companyDep.setUpdateTime(DateUtils.getNowDate());
+        companyDep.setUpdateBy(ShiroUtils.getLoginName());
         return companyDepMapper.updateCompanyDep(companyDep);
     }
 
@@ -106,10 +111,5 @@ public class CompanyDepServiceImpl implements ICompanyDepService
     public int deleteCompanyDepById(Long id)
     {
         return companyDepMapper.deleteCompanyDepById(id);
-    }
-
-    @Override
-    public CompanyDep selectLastCode() {
-        return companyDepMapper.selectLastCode();
     }
 }

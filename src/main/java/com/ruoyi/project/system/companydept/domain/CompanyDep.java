@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
  * 公司部门对象 m_company_dep
  * 
  * @author zxy
- * @date 2022-02-21
+ * @date 2022-02-22
  */
 public class CompanyDep extends BaseEntity
 {
@@ -22,12 +22,24 @@ public class CompanyDep extends BaseEntity
     @Excel(name = "部门名称")
     private String name;
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    /** 所屬公司 */
+    @Excel(name= "所屬公司")
+    private String companyName;
+
     /** 部门代码 */
     @Excel(name = "部门代码")
     private String code;
 
-    /**  */
-    @Excel(name = "")
+    /** 所属公司 */
+    @Excel(name = "所属公司")
     private Long companyId;
 
     public void setId(Long id)

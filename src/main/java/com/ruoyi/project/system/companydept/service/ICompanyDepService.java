@@ -7,7 +7,7 @@ import com.ruoyi.project.system.companydept.domain.CompanyDep;
  * 公司部门Service接口
  * 
  * @author zxy
- * @date 2022-02-21
+ * @date 2022-02-22
  */
 public interface ICompanyDepService 
 {
@@ -19,6 +19,7 @@ public interface ICompanyDepService
      */
     public CompanyDep selectCompanyDepById(Long id);
 
+    public CompanyDep selectLastCode();
     /**
      * 查询公司部门列表
      * 
@@ -58,6 +59,4 @@ public interface ICompanyDepService
      * @return 结果
      */
     public int deleteCompanyDepById(Long id);
-
-    public CompanyDep selectLastCode();
 }
