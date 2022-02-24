@@ -2,6 +2,7 @@ package com.ruoyi.project.system.record.controller;
 
 import java.util.List;
 
+import com.ruoyi.project.system.developtype.mapper.DevelopTypeMapper;
 import com.ruoyi.project.system.project.mapper.ProjectMapper;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class RecordController extends BaseController
 
     @Autowired
     private ProjectMapper projectMapper;
+
+    @Autowired
+    private DevelopTypeMapper developTypeMapper;
 
     @RequiresPermissions("system:record:view")
     @GetMapping()
@@ -79,6 +83,7 @@ public class RecordController extends BaseController
     @GetMapping("/add")
     public String add(ModelMap mmap)
     {
+        mmap.put("developTypes", developTypeMapper.selectAllDevelopType());
         mmap.put("projects", projectMapper.selectAllProjects());
         return prefix + "/add";
     }
@@ -103,6 +108,7 @@ public class RecordController extends BaseController
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
         Record record = recordService.selectRecordById(id);
+        mmap.put("developtypes", developTypeMapper.selectAllDevelopType());
         mmap.put("projects", projectMapper.selectAllProjects());
         mmap.put("record", record);
         return prefix + "/edit";

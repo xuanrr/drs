@@ -8,7 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="projectId"    column="project_id"    />
         <result property="projectName"    column="project_name"    />
-        <result property="developType"    column="develop_type"    />
+        <result property="developTypeId"    column="develop_type_id"    />
+        <result property="developName"    column="develop_name"    />
         <result property="createTime"    column="create_time"    />
         <result property="createBy"    column="create_by"    />
         <result property="updateTime"    column="update_time"    />
@@ -17,17 +18,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectRecordVo">
-        select r.id, r.project_id, r.develop_type, r.create_time, r.create_by, r.update_time, r.update_by, r.develop_detail,
-               p.name project_name
+        select r.id, r.project_id, r.develop_type_id, r.create_time, r.create_by, r.update_time, r.update_by, r.develop_detail,
+               p.name project_name,
+               dt.name develop_name
         from m_record r
         left join m_project p on r.project_id=p.id
+        left join m_develop_type dt on dt.id=r.develop_type_id
     </sql>
 
     <select id="selectRecordList" parameterType="Record" resultMap="RecordResult">
         <include refid="selectRecordVo"/>
         <where>  
             <if test="projectId != null "> and r.project_id = #{projectId}</if>
-            <if test="developType != null  and developType != ''"> and r.develop_type = #{developType}</if>
+            <if test="developTypeId != null  and developTypeId != ''"> and r.develop_type_id = #{developTypeId}</if>
             <if test="createTime != null "> and r.create_time = #{createTime}</if>
             <if test="createBy != null  and createBy != ''"> and r.create_by = #{createBy}</if>
             <if test="updateTime != null "> and r.update_time = #{updateTime}</if>
@@ -45,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into m_record
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="projectId != null">project_id,</if>
-            <if test="developType != null and developType != ''">develop_type,</if>
+            <if test="developTypeId != null and developTypeId != ''">develop_type_id,</if>
             <if test="createTime != null">create_time,</if>
             <if test="createBy != null">create_by,</if>
             <if test="updateTime != null">update_time,</if>
@@ -54,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="projectId != null">#{projectId},</if>
-            <if test="developType != null and developType != ''">#{developType},</if>
+            <if test="developTypeId != null and developTypeId != ''">#{developTypeId},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
@@ -67,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update m_record
         <trim prefix="SET" suffixOverrides=",">
             <if test="projectId != null">project_id = #{projectId},</if>
-            <if test="developType != null and developType != ''">develop_type = #{developType},</if>
+            <if test="developTypeId != null and developTypeId != ''">develop_type_id = #{developTypeId},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>

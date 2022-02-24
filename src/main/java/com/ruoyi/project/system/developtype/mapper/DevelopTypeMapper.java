@@ -21,6 +21,7 @@ public interface DevelopTypeMapper
      */
     public DevelopType selectDevelopTypeByName(String name);
 
+    public List<DevelopType> selectAllDevelopType();
     /**
      * 查询运维类型列表
      * 

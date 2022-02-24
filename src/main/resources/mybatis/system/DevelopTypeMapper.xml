@@ -21,6 +21,9 @@
         select name, id, code, sort, remark, available, create_by, create_time, update_by, update_time from m_develop_type
     </sql>
 
+    <select id="selectAllDevelopType" resultMap="DevelopTypeResult">
+        select * from m_develop_type
+    </select>
     <select id="selectDevelopTypeList" parameterType="DevelopType" resultMap="DevelopTypeResult">
         <include refid="selectDevelopTypeVo"/>
         <where>

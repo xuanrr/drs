@@ -22,6 +22,20 @@ public class Record extends BaseEntity
     @Excel(name = "项目")
     private Long projectId;
 
+    /** 运维类型 */
+    @Excel(name= "运维类型")
+    private Long developTypeId;
+
+    public String getDevelopName() {
+        return developName;
+    }
+
+    public void setDevelopName(String developName) {
+        this.developName = developName;
+    }
+
+    private String developName;
+
     public String getProjectName() {
         return projectName;
     }
@@ -33,9 +47,6 @@ public class Record extends BaseEntity
     /** 项目名称 */
     private String projectName;
 
-    /** 运维操作 */
-    @Excel(name = "运维操作")
-    private String developType;
 
     /** 运维详细信息 */
     @Excel(name = "运维详细信息")
@@ -59,14 +70,14 @@ public class Record extends BaseEntity
     {
         return projectId;
     }
-    public void setDevelopType(String developType)
+    public void setDevelopType(Long developTypeId)
     {
-        this.developType = developType;
+        this.developTypeId = developTypeId;
     }
 
-    public String getDevelopType()
+    public Long getDevelopType()
     {
-        return developType;
+        return developTypeId;
     }
     public void setDevelopDetail(String developDetail)
     {
