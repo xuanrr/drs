@@ -55,9 +55,9 @@ public class RecordServiceImpl implements IRecordService
     @Override
     public int insertRecord(Record record)
     {
+        record.setUpdateBy(ShiroUtils.getLoginName());
         record.setCreateBy(ShiroUtils.getLoginName());
         record.setCreateTime(DateUtils.getNowDate());
-        record.setUpdateBy(ShiroUtils.getLoginName());
         record.setUpdateTime(DateUtils.getNowDate());
         return recordMapper.insertRecord(record);
     }

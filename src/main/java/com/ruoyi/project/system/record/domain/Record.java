@@ -22,26 +22,23 @@ public class Record extends BaseEntity
     @Excel(name = "项目")
     private Long projectId;
 
-    public String getDevelopType() {
-        return developType;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setDevelopType(String developType) {
-        this.developType = developType;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
-    public String getDevelopDetail() {
-        return developDetail;
-    }
+    /** 项目名称 */
+    private String projectName;
 
-    public void setDevelopDetail(String developDetail) {
-        this.developDetail = developDetail;
-    }
-
-    /** 运维类型 */
+    /** 运维操作 */
     @Excel(name = "运维操作")
     private String developType;
 
+    /** 运维详细信息 */
+    @Excel(name = "运维详细信息")
     private String developDetail;
 
     public void setId(Long id)
@@ -62,7 +59,24 @@ public class Record extends BaseEntity
     {
         return projectId;
     }
+    public void setDevelopType(String developType)
+    {
+        this.developType = developType;
+    }
 
+    public String getDevelopType()
+    {
+        return developType;
+    }
+    public void setDevelopDetail(String developDetail)
+    {
+        this.developDetail = developDetail;
+    }
+
+    public String getDevelopDetail()
+    {
+        return developDetail;
+    }
 
     @Override
     public String toString() {
@@ -70,11 +84,11 @@ public class Record extends BaseEntity
             .append("id", getId())
             .append("projectId", getProjectId())
             .append("developType", getDevelopType())
-            .append("developDetail", getDevelopDetail())
             .append("createTime", getCreateTime())
             .append("createBy", getCreateBy())
             .append("updateTime", getUpdateTime())
             .append("updateBy", getUpdateBy())
+            .append("developDetail", getDevelopDetail())
             .toString();
     }
 }

@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="selectAllProjects" resultMap="ProjectResult">
-        select p.id,p.name from m_project p
+        select * from m_project
     </select>
 
     <insert id="insertProject" parameterType="Project" useGeneratedKeys="true" keyProperty="id">

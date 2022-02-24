@@ -35,6 +35,7 @@ public class RecordController extends BaseController
 
     @Autowired
     private IRecordService recordService;
+
     @Autowired
     private ProjectMapper projectMapper;
 
