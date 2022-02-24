@@ -141,6 +141,19 @@ create table m_project_member
     primary key (user_id, project_id)
 );
 
+create table m_record
+(
+    id              int auto_increment
+        primary key,
+    project_id      int                                not null,
+    develop_type_id int                                not null,
+    create_time     datetime default CURRENT_TIMESTAMP null,
+    create_by       varchar(20)                        null,
+    update_time     datetime default CURRENT_TIMESTAMP null,
+    update_by       varchar(20)                        null,
+    develop_detail  varchar(255)                       null
+);
+
 create table qrtz_calendars
 (
     sched_name    varchar(120) not null comment '调度名称',

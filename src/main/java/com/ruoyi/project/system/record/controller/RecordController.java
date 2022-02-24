@@ -108,7 +108,7 @@ public class RecordController extends BaseController
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
         Record record = recordService.selectRecordById(id);
-        mmap.put("developtypes", developTypeMapper.selectAllDevelopType());
+        mmap.put("developTypes", developTypeMapper.selectAllDevelopType());
         mmap.put("projects", projectMapper.selectAllProjects());
         mmap.put("record", record);
         return prefix + "/edit";
