@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectCompanyDepById" parameterType="Long" resultMap="CompanyDepResult">
         <include refid="selectCompanyDepVo"/>
-        where id = #{id}
+        where cd.id = #{id}
     </select>
 
     <select id="selectLastCode" resultMap="CompanyDepResult">

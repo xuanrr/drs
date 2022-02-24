@@ -77,9 +77,10 @@
                 <label class="col-sm-3 control-label">供应商:</label>
                 <div class="col-sm-8">
                     <select id="vendor" name="vendor" class="form-control">
-                        <option value="" selected>请选择供应商</option>
-                        <option th:each="vendor:${vendors}" th:value="${vendor.name}" th:text="${vendor.name}" ></option>
+<!--                        <option value="" selected>请选择供应商</option>-->
+                        <option th:each="vendor:${vendors}" th:value="${vendor.name}" th:text="${vendor.name}"></option>
                     </select>
+
                 </div>
             </div>
 
@@ -96,7 +97,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">供应商人天：</label>
                 <div class="col-sm-8">
-                    <input id="vendorManday" name="vendorManday" class="form-control" type="text">
+                    <input name="vendorManday" th:field="*{vendorManDay}" class="form-control" type="text">
                 </div>
             </div>
 

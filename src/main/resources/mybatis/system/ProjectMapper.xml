@@ -59,6 +59,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
 
+    <select id="selectAllProjects" resultMap="ProjectResult">
+        select p.id,p.name from m_project p
+    </select>
+
     <insert id="insertProject" parameterType="Project" useGeneratedKeys="true" keyProperty="id">
         insert into m_project
         <trim prefix="(" suffix=")" suffixOverrides=",">

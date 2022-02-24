@@ -21,6 +21,7 @@ public interface ProjectMapper
      */
     public Project selectProjectById(Long id);
 
+    public Project selectAllProjects();
     /**
      * 查询项目列表
      * 

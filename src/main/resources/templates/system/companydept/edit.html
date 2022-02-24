@@ -34,10 +34,10 @@
 
         function submitHandler() {
             if ($.validate.form()) {
-                var data = $("#form-companydept-add").serializeArray();
+                var data = $("#form-companydept-edit").serializeArray();
                 var companyId = $.form.selectSelects("company");
                 data.push({"name": "companyId", "value": companyId});
-                $.operate.save(prefix + "/add", data);
+                $.operate.save(prefix + "/edit", data);
             }
         }
     </script>
