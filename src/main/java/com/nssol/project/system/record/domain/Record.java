@@ -59,6 +59,7 @@ public class Record extends BaseEntity
     {
         return id;
     }
+
     public void setProjectId(Long projectId)
     {
         this.projectId = projectId;
@@ -68,6 +69,7 @@ public class Record extends BaseEntity
     {
         return projectId;
     }
+
     public void setDevelopType(Long developTypeId)
     {
         this.developTypeId = developTypeId;

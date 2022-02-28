@@ -19,6 +19,11 @@ public interface ICompanyDepService
      */
     public CompanyDep selectCompanyDepById(Long id);
 
+    /**
+     * 查询最后公司代码的公司部门
+     *
+     * @return 公司部门
+     */
     public CompanyDep selectLastCode();
     /**
      * 查询公司部门列表

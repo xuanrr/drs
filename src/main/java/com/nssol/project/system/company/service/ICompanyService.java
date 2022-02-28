@@ -19,13 +19,32 @@ public interface ICompanyService
      */
     public Company selectCompanyById(Long id);
 
+    /**
+     * 查询所有公司
+     *
+     * @return 公司集合
+     */
     public List<Company> selectCompaniesAll();
 
-
+    /**
+     * 查询所有客户公司
+     *
+     * @return 公司集合
+     */
     public List<Company> selectCustomerAll();
 
+    /**
+     * 查询最后一个公司代码的公司
+     *
+     * @return 公司
+     */
     public Company selectLastCode();
 
+    /**
+     * 查询所有供应商公司
+     *
+     * @return 公司集合
+     */
     public List<Company> selectVendorAll();
     /**
      * 查询公司列表
