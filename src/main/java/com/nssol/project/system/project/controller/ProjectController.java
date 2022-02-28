@@ -46,8 +46,11 @@ public class ProjectController extends BaseController
 
     @RequiresPermissions("system:project:view")
     @GetMapping()
-    public String project()
+    public String project(ModelMap mmap)
     {
+        mmap.put("users", userService.selectNormalUserList());
+        mmap.put("vendors",companyService.selectVendorAll());
+        mmap.put("customers",companyService.selectCustomerAll());
         return prefix + "/project";
     }
 

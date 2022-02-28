@@ -40,17 +40,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join m_company mc on p.customer_id = mc.id
         left join m_entrust_type met on met.code=p.entrust_type
         <where>
-            <if test="code != null  and code != ''"> and code = #{code}</if>
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="startDate != null "> and start_date = #{startDate}</if>
-            <if test="endDate != null "> and end_date = #{endDate}</if>
-            <if test="customerId != null "> and customer_id = #{customerId}</if>
-            <if test="manDay != null "> and man_day = #{manDay}</if>
-            <if test="vendorNeeded != null "> and vendor_needed = #{vendorNeeded}</if>
-            <if test="entrustType != null "> and entrust_type = #{entrustType}</if>
-            <if test="vendorName != null  and vendorName != ''"> and vendor_name like concat('%', #{vendorName}, '%')</if>
-            <if test="available != null "> and available = #{available}</if>
-            <if test="vendorManday != null "> and vendor_manday = #{vendorManday}</if>
+            <if test="code != null  and code != ''"> and p.code = #{code}</if>
+            <if test="name != null  and name != ''"> and p.name like concat('%', #{name}, '%')</if>
+            <if test="startDate != null "> and p.start_date = #{startDate}</if>
+            <if test="endDate != null "> and p.end_date = #{endDate}</if>
+            <if test="customerId != null "> and p.customer_id = #{customerId}</if>
+            <if test="manDay != null "> and p.man_day = #{manDay}</if>
+            <if test="vendorNeeded != null "> and p.vendor_needed = #{vendorNeeded}</if>
+            <if test="entrustType != null "> and p.entrust_type = #{entrustType}</if>
+            <if test="vendorName != null  and vendorName != ''"> and p.vendor_name like concat('%', #{vendorName}, '%')</if>
+            <if test="available != null "> and p.available = #{available}</if>
+            <if test="vendorManday != null "> and p.vendor_manday = #{vendorManday}</if>
         </where>
     </select>
     

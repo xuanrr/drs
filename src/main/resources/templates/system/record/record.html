@@ -10,6 +10,21 @@
                 <form id="formId">
                     <div class="select-list">
                         <ul>
+
+                            <li>
+                                <label>项目：</label>
+                                <select name="projectId">
+                                    <option value="">所有</option>
+                                    <option th:each="project:${projects}" th:value="${project.id}" th:text="${project.name}" ></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>运维类型：</label>
+                                <select name="developTypeId">
+                                    <option value="">所有</option>
+                                    <option th:each="developType:${developTypes}" th:value="${developType.id}" th:text="${developType.name}" ></option>
+                                </select>
+                            </li>
                             <li>
                                 <label>创建时间：</label>
                                 <input type="text" class="time-input" placeholder="请选择创建时间" name="createTime"/>
@@ -85,6 +100,10 @@
                     title: '运维类型'
                 },
                 {
+                    field: 'developDetail',
+                    title: '运维详细信息'
+                },
+                {
                     field: 'createBy',
                     title: '创建人'
                 },
@@ -99,10 +118,6 @@
                 {
                     field: 'updateTime',
                     title: '更新时间'
-                },
-                {
-                    field: 'developDetail',
-                    title: '运维详细信息'
                 },
                 {
                     title: '操作',

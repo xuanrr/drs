@@ -27,6 +27,13 @@
                                 <input type="text" class="time-input" placeholder="请选择结束时间" name="endDate"/>
                             </li>
                             <li>
+                                <label>客户：</label>
+                                <select name="customerId">
+                                    <option value="">所有</option>
+                                    <option th:each="customer:${customers}" th:value="${customer.id}" th:text="${customer.name}" ></option>
+                                </select>
+                            </li>
+                            <li>
                                 <label>人天：</label>
                                 <input type="text" name="manDay"/>
                             </li>
@@ -36,6 +43,24 @@
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
+                            </li>
+                            <li>
+                                <label>供应商：</label>
+                                <select name="vendorName" >
+                                    <option value="">所有</option>
+                                    <option th:each="vendor:${vendors}" th:value="${vendor.name}" th:text="${vendor.name}" ></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>委托方式：</label>
+                                <select name="entrustType" th:with="type=${@dict.getType('m_entrust_type')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>                                </select>
+                            </li>
+
+                            <li>
+                                <label>供应商人天：</label>
+                                <input type="text" name="vendorManDay"/>
                             </li>
                             <li>
                                 <label>是否有效：</label>

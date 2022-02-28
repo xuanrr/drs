@@ -41,8 +41,9 @@ public class CompanyDepController extends BaseController
 
     @RequiresPermissions("system:companydept:view")
     @GetMapping()
-    public String companydept()
+    public String companydept(ModelMap mmap)
     {
+        mmap.put("companies", companyService.selectCompaniesAll());
         return prefix + "/companydept";
     }
 

@@ -19,17 +19,25 @@
                                 <input type="text" name="code"/>
                             </li>
                             <li>
-                                <label>创建时间：</label>
-                                <input type="text" class="time-input" placeholder="请选择创建时间" name="createTime"/>
+                                <label>所属公司：</label>
+                                <select name="companyId" >
+                                    <option value="">所有</option>
+                                    <option th:each="company:${companies}" th:value="${company.id}" th:text="${company.name}" ></option>
+                                </select>
                             </li>
+
+<!--                            <li>-->
+<!--                                <label>创建时间：</label>-->
+<!--                                <input type="text" class="time-input" placeholder="请选择创建时间" name="createTime"/>-->
+<!--                            </li>-->
                             <li>
                                 <label>创建人：</label>
                                 <input type="text" name="createBy"/>
                             </li>
-                            <li>
-                                <label>更新时间：</label>
-                                <input type="text" class="time-input" placeholder="请选择更新时间" name="updateTime"/>
-                            </li>
+<!--                            <li>-->
+<!--                                <label>更新时间：</label>-->
+<!--                                <input type="text" class="time-input" placeholder="请选择更新时间" name="updateTime"/>-->
+<!--                            </li>-->
                             <li>
                                 <label>更新人：</label>
                                 <input type="text" name="updateBy"/>

@@ -14,17 +14,16 @@
                             <label>公司名称：</label>
                             <input type="text" name="name"/>
                         </li>
-
+                        <li>
+                            <label>公司代码：</label>
+                            <input type="text" name="code"/>
+                        </li>
                         <li>
                             <label>是否为供应商：</label>
                             <select name="isvendor" th:with="type=${@dict.getType('sys_yes_no')}">
                                 <option value="">所有</option>
                                 <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                             </select>
-                        </li>
-                        <li>
-                            <label>公司代码：</label>
-                            <input type="text" name="code"/>
                         </li>
                         <li>
                             <label>是否为客户：</label>

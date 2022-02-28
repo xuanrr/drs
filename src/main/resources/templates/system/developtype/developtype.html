@@ -29,22 +29,22 @@
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                            <li>
-                                <label>创建人：</label>
-                                <input type="text" name="createBy"/>
-                            </li>
-                            <li>
-                                <label>创建时间：</label>
-                                <input type="text" class="time-input" placeholder="请选择创建时间" name="createTime"/>
-                            </li>
-                            <li>
-                                <label>更新人：</label>
-                                <input type="text" name="updateBy"/>
-                            </li>
-                            <li>
-                                <label>更新时间：</label>
-                                <input type="text" class="time-input" placeholder="请选择更新时间" name="updateTime"/>
-                            </li>
+<!--                            <li>-->
+<!--                                <label>创建人：</label>-->
+<!--                                <input type="text" name="createBy"/>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <label>创建时间：</label>-->
+<!--                                <input type="text" class="time-input" placeholder="请选择创建时间" name="createTime"/>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <label>更新人：</label>-->
+<!--                                <input type="text" name="updateBy"/>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <label>更新时间：</label>-->
+<!--                                <input type="text" class="time-input" placeholder="请选择更新时间" name="updateTime"/>-->
+<!--                            </li>-->
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -102,10 +102,6 @@
                 {
                     field: 'sort',
                     title: '排序号'
-                },
-                {
-                    field: 'remark',
-                    title: '备注'
                 },
                 {
                     field: 'available',
