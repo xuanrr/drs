@@ -6,36 +6,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="Record" id="RecordResult">
         <result property="id"    column="id"    />
+        <result property="page"    column="page"    />
         <result property="projectId"    column="project_id"    />
         <result property="projectName"    column="project_name"    />
         <result property="developTypeId"    column="develop_type_id"    />
         <result property="developName"    column="develop_name"    />
+        <result property="problem"    column="problem"    />
+        <result property="developDetail"    column="develop_detail"    />
+        <result property="status"    column="status"    />
+        <result property="presentor"    column="presentor"    />
+        <result property="presentDate"    column="present_date"    />
+        <result property="operator"    column="operator"    />
+        <result property="completeDate"    column="complete_date"    />
+        <result property="confirmDate"    column="confirm_date"    />
         <result property="createTime"    column="create_time"    />
         <result property="createBy"    column="create_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="updateBy"    column="update_by"    />
-        <result property="developDetail"    column="develop_detail"    />
     </resultMap>
 
     <sql id="selectRecordVo">
-        select r.id, r.project_id, r.develop_type_id, r.create_time, r.create_by, r.update_time, r.update_by, r.develop_detail,
-               p.name project_name,
-               dt.name develop_name
+        select r.id, r.page, r.project_id, r.develop_type_id, r.problem, r.develop_detail, r.status, r.presentor, r.present_date, r.operator, r.complete_date, r.confirm_date, r.create_time, r.create_by, r.update_time, r.update_by,
+               p.name as project_name,
+               dt.name as develop_name
         from m_record r
-        left join m_project p on r.project_id=p.id
+        left join m_project p on p.id=r.project_id
         left join m_develop_type dt on dt.id=r.develop_type_id
     </sql>
 
     <select id="selectRecordList" parameterType="Record" resultMap="RecordResult">
         <include refid="selectRecordVo"/>
         <where>  
+            <if test="page != null  and page != ''"> and r.page = #{page}</if>
             <if test="projectId != null "> and r.project_id = #{projectId}</if>
-            <if test="developTypeId != null  and developTypeId != ''"> and r.develop_type_id = #{developTypeId}</if>
-            <if test="createTime != null "> and r.create_time = #{createTime}</if>
-            <if test="createBy != null  and createBy != ''"> and r.create_by = #{createBy}</if>
-            <if test="updateTime != null "> and r.update_time = #{updateTime}</if>
-            <if test="updateBy != null  and updateBy != ''"> and r.update_by = #{updateBy}</if>
+            <if test="projectName != null "> and p.name = #{projectName}</if>
+            <if test="developTypeId != null "> and r.develop_type_id = #{developTypeId}</if>
+            <if test="developName != null "> and dt.name = #{developName}</if>
+            <if test="problem != null  and problem != ''"> and r.problem = #{problem}</if>
             <if test="developDetail != null  and developDetail != ''"> and r.develop_detail = #{developDetail}</if>
+            <if test="status != null "> and r.status = #{status}</if>
+            <if test="presentor != null  and presentor != ''"> and r.presentor = #{presentor}</if>
+            <if test="presentDate != null "> and r.present_date = #{presentDate}</if>
+            <if test="operator != null  and operator != ''"> and r.operator = #{operator}</if>
+            <if test="completeDate != null "> and r.complete_date = #{completeDate}</if>
+            <if test="confirmDate != null "> and r.confirm_date = #{confirmDate}</if>
         </where>
     </select>
     
@@ -47,35 +61,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertRecord" parameterType="Record" useGeneratedKeys="true" keyProperty="id">
         insert into m_record
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="page != null and page != ''">page,</if>
             <if test="projectId != null">project_id,</if>
-            <if test="developTypeId != null and developTypeId != ''">develop_type_id,</if>
+            <if test="developTypeId != null">develop_type_id,</if>
+            <if test="problem != null and problem != ''">problem,</if>
+            <if test="developDetail != null and developDetail != ''">develop_detail,</if>
+            <if test="status != null">status,</if>
+            <if test="presentor != null and presentor != ''">presentor,</if>
+            <if test="presentDate != null">present_date,</if>
+            <if test="operator != null and operator != ''">operator,</if>
+            <if test="completeDate != null">complete_date,</if>
+            <if test="confirmDate != null">confirm_date,</if>
             <if test="createTime != null">create_time,</if>
             <if test="createBy != null">create_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="updateBy != null">update_by,</if>
-            <if test="developDetail != null">develop_detail,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="page != null and page != ''">#{page},</if>
             <if test="projectId != null">#{projectId},</if>
-            <if test="developTypeId != null and developTypeId != ''">#{developTypeId},</if>
+            <if test="developTypeId != null">#{developTypeId},</if>
+            <if test="problem != null and problem != ''">#{problem},</if>
+            <if test="developDetail != null and developDetail != ''">#{developDetail},</if>
+            <if test="status != null">#{status},</if>
+            <if test="presentor != null and presentor != ''">#{presentor},</if>
+            <if test="presentDate != null">#{presentDate},</if>
+            <if test="operator != null and operator != ''">#{operator},</if>
+            <if test="completeDate != null">#{completeDate},</if>
+            <if test="confirmDate != null">#{confirmDate},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
-            <if test="developDetail != null">#{developDetail},</if>
          </trim>
     </insert>
 
     <update id="updateRecord" parameterType="Record">
         update m_record
         <trim prefix="SET" suffixOverrides=",">
+            <if test="page != null and page != ''">page = #{page},</if>
             <if test="projectId != null">project_id = #{projectId},</if>
-            <if test="developTypeId != null and developTypeId != ''">develop_type_id = #{developTypeId},</if>
+            <if test="developTypeId != null">develop_type_id = #{developTypeId},</if>
+            <if test="problem != null and problem != ''">problem = #{problem},</if>
+            <if test="developDetail != null and developDetail != ''">develop_detail = #{developDetail},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="presentor != null and presentor != ''">presentor = #{presentor},</if>
+            <if test="presentDate != null">present_date = #{presentDate},</if>
+            <if test="operator != null and operator != ''">operator = #{operator},</if>
+            <if test="completeDate != null">complete_date = #{completeDate},</if>
+            <if test="confirmDate != null">confirm_date = #{confirmDate},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
-            <if test="developDetail != null">develop_detail = #{developDetail},</if>
         </trim>
         where id = #{id}
     </update>

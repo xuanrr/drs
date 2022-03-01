@@ -2,40 +2,93 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <th:block th:include="include :: header('新增运维记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-record-add">
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label">运维类型:</label>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">画面：</label>
                 <div class="col-sm-8">
-                    <select id="developType" name="developType" class="form-control">
-                        <option th:each="developType:${developTypes}" th:value="${developType.id}" th:text="${developType.name}" ></option>
-                    </select>
+                    <input name="page" class="form-control" type="text" required>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label">运维详细信息：</label>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">项目：</label>
                 <div class="col-sm-8">
-                    <textarea name="developDetail" class="form-control"></textarea>
+                    <input name="projectId" class="form-control" type="text" required>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label">项目:</label>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">运维类型：</label>
                 <div class="col-sm-8">
-                    <select id="project" name="project" class="form-control">
-<!--                        <option>请选择项目</option>-->
-                        <option th:each="project:${projects}" th:value="${project.id}" th:text="${project.name}" ></option>
-                    </select>
+                    <input name="developTypeId" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label is-required">问题：</label>
+                <div class="col-sm-8">
+                    <textarea name="problem" class="form-control" required></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label is-required">操作详细：</label>
+                <div class="col-sm-8">
+                    <textarea name="developDetail" class="form-control" required></textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">状态：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_status')}">
+                        <input type="radio" th:id="${'status_' + dict.dictCode}" name="status" th:value="${dict.dictValue}" th:checked="${dict.default}" required>
+                        <label th:for="${'status_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">提出人：</label>
+                <div class="col-sm-8">
+                    <input name="presentor" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">提出日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="presentDate" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">操作人：</label>
+                <div class="col-sm-8">
+                    <input name="operator" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">完成日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="completeDate" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">确认日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="confirmDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
     <th:block th:include="include :: footer" />
-
+    <th:block th:include="include :: datetimepicker-js" />
     <script th:inline="javascript">
         var prefix = ctx + "system/record"
         $("#form-record-add").validate({
@@ -44,14 +97,27 @@
 
         function submitHandler() {
             if ($.validate.form()) {
-                var data = $("#form-record-add").serializeArray();
-                var developTypeId= $.form.selectSelects("developType");
-                var projectId = $.form.selectSelects("project");
-                data.push({"name": "projectId", "value": projectId});
-                data.push({"name": "developType", "value": developTypeId});
-                $.operate.save(prefix + "/add",data);
+                $.operate.save(prefix + "/add", $('#form-record-add').serialize());
             }
         }
+
+        $("input[name='presentDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='completeDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='confirmDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
     </script>
 </body>
 </html>

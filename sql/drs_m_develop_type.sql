@@ -1,0 +1,2 @@
+INSERT INTO drs.m_develop_type (id, name, code, sort, remark, available, create_by, create_time, update_by, update_time) VALUES (1, '1222', '222', 22, '', 1, 'admin', '2022-02-21 13:15:27', 'admin', '2022-02-21 13:15:27');
+INSERT INTO drs.m_develop_type (id, name, code, sort, remark, available, create_by, create_time, update_by, update_time) VALUES (2, '类型1', '12313', 2, '', 1, 'admin', '2022-02-24 16:56:38', 'admin', '2022-02-24 16:56:38');

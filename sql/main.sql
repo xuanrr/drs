@@ -145,13 +145,21 @@ create table m_record
 (
     id              int auto_increment
         primary key,
+    page            varchar(255)                       not null,
     project_id      int                                not null,
     develop_type_id int                                not null,
+    problem         text                               null,
+    develop_detail  text                               null,
+    status          int      default 1                 not null,
+    presentor       varchar(20)                        not null,
+    present_date    date                               not null,
+    operator        varchar(20)                        not null,
+    complete_date   date                               not null,
+    confirm_date    date                               null,
     create_time     datetime default CURRENT_TIMESTAMP null,
     create_by       varchar(20)                        null,
     update_time     datetime default CURRENT_TIMESTAMP null,
-    update_by       varchar(20)                        null,
-    develop_detail  varchar(255)                       null
+    update_by       varchar(20)                        null
 );
 
 create table qrtz_calendars

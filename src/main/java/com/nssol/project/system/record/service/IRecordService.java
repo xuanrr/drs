@@ -7,7 +7,7 @@ import com.nssol.project.system.record.domain.Record;
  * 运维记录Service接口
  * 
  * @author zxy
- * @date 2022-02-24
+ * @date 2022-03-01
  */
 public interface IRecordService 
 {

@@ -26,7 +26,7 @@ import com.nssol.framework.web.page.TableDataInfo;
  * 运维记录Controller
  * 
  * @author zxy
- * @date 2022-02-24
+ * @date 2022-03-01
  */
 @Controller
 @RequestMapping("/system/record")
@@ -45,10 +45,8 @@ public class RecordController extends BaseController
 
     @RequiresPermissions("system:record:view")
     @GetMapping()
-    public String record(ModelMap mmap)
+    public String record()
     {
-        mmap.put("developTypes", developTypeMapper.selectAllDevelopType());
-        mmap.put("projects", projectMapper.selectAllProjects());
         return prefix + "/record";
     }
 

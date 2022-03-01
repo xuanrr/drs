@@ -2,15 +2,13 @@ package com.nssol.project.system.record.mapper;
 
 import java.util.List;
 import com.nssol.project.system.record.domain.Record;
-import org.springframework.stereotype.Repository;
 
 /**
  * 运维记录Mapper接口
  * 
  * @author zxy
- * @date 2022-02-24
+ * @date 2022-03-01
  */
-@Repository
 public interface RecordMapper 
 {
     /**

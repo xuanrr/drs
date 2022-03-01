@@ -10,36 +10,44 @@
                 <form id="formId">
                     <div class="select-list">
                         <ul>
-
+                            <li>
+                                <label>画面：</label>
+                                <input type="text" name="page"/>
+                            </li>
                             <li>
                                 <label>项目：</label>
-                                <select name="projectId">
-                                    <option value="">所有</option>
-                                    <option th:each="project:${projects}" th:value="${project.id}" th:text="${project.name}" ></option>
-                                </select>
+                                <input type="text" name="projectId"/>
                             </li>
                             <li>
                                 <label>运维类型：</label>
-                                <select name="developTypeId">
+                                <input type="text" name="developTypeId"/>
+                            </li>
+                            <li>
+                                <label>状态：</label>
+                                <select name="status" th:with="type=${@dict.getType('sys_status')}">
                                     <option value="">所有</option>
-                                    <option th:each="developType:${developTypes}" th:value="${developType.id}" th:text="${developType.name}" ></option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
                             <li>
-                                <label>创建时间：</label>
-                                <input type="text" class="time-input" placeholder="请选择创建时间" name="createTime"/>
+                                <label>提出人：</label>
+                                <input type="text" name="presentor"/>
                             </li>
                             <li>
-                                <label>创建人：</label>
-                                <input type="text" name="createBy"/>
+                                <label>提出日期：</label>
+                                <input type="text" class="time-input" placeholder="请选择提出日期" name="presentDate"/>
                             </li>
                             <li>
-                                <label>更新时间：</label>
-                                <input type="text" class="time-input" placeholder="请选择更新时间" name="updateTime"/>
+                                <label>操作人：</label>
+                                <input type="text" name="operator"/>
                             </li>
                             <li>
-                                <label>更新人：</label>
-                                <input type="text" name="updateBy"/>
+                                <label>完成日期：</label>
+                                <input type="text" class="time-input" placeholder="请选择完成日期" name="completeDate"/>
+                            </li>
+                            <li>
+                                <label>确认日期：</label>
+                                <input type="text" class="time-input" placeholder="请选择确认日期" name="confirmDate"/>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -73,6 +81,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:record:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:record:remove')}]];
+        var statusDatas = [[${@dict.getType('sys_status')}]];
         var prefix = ctx + "system/record";
 
         $(function() {
@@ -92,32 +101,51 @@
                     visible: false
                 },
                 {
-                    field: 'projectName',
+                    field: 'page',
+                    title: '画面'
+                },
+                {
+                    field: 'projectId',
                     title: '项目'
                 },
                 {
-                    field: 'developName',
+                    field: 'developTypeId',
                     title: '运维类型'
                 },
                 {
+                    field: 'problem',
+                    title: '问题'
+                },
+                {
                     field: 'developDetail',
-                    title: '运维详细信息'
+                    title: '操作详细'
                 },
                 {
-                    field: 'createBy',
-                    title: '创建人'
+                    field: 'status',
+                    title: '状态',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(statusDatas, value);
+                    }
                 },
                 {
-                    field: 'createTime',
-                    title: '创建时间'
+                    field: 'presentor',
+                    title: '提出人'
                 },
                 {
-                    field: 'updateBy',
-                    title: '更新人'
+                    field: 'presentDate',
+                    title: '提出日期'
                 },
                 {
-                    field: 'updateTime',
-                    title: '更新时间'
+                    field: 'operator',
+                    title: '操作人'
+                },
+                {
+                    field: 'completeDate',
+                    title: '完成日期'
+                },
+                {
+                    field: 'confirmDate',
+                    title: '确认日期'
                 },
                 {
                     title: '操作',

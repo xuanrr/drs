@@ -1,0 +1,1 @@
+INSERT INTO drs.sys_user_online (sessionId, login_name, dept_name, ipaddr, login_location, browser, os, status, start_timestamp, last_access_time, expire_time) VALUES ('8ddfe142-15bf-4e50-a762-43670f725f9e', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', 'on_line', '2022-03-01 10:36:34', '2022-03-01 10:37:42', 1800000);

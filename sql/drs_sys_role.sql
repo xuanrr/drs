@@ -1,0 +1,2 @@
+INSERT INTO drs.sys_role (role_id, role_name, role_key, role_sort, data_scope, status, del_flag, create_by, create_time, update_by, update_time, remark) VALUES (1, '超级管理员', 'admin', 1, '1', '0', '0', 'admin', '2021-12-20 14:28:19', '', null, '超级管理员');
+INSERT INTO drs.sys_role (role_id, role_name, role_key, role_sort, data_scope, status, del_flag, create_by, create_time, update_by, update_time, remark) VALUES (2, '普通角色', 'common', 2, '2', '0', '0', 'admin', '2021-12-20 14:28:19', 'admin', '2022-01-04 17:44:35', '普通角色');

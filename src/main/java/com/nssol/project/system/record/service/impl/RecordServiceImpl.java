@@ -2,7 +2,6 @@ package com.nssol.project.system.record.service.impl;
 
 import java.util.List;
 import com.nssol.common.utils.DateUtils;
-import com.nssol.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.nssol.project.system.record.mapper.RecordMapper;
@@ -14,7 +13,7 @@ import com.nssol.common.utils.text.Convert;
  * 运维记录Service业务层处理
  * 
  * @author zxy
- * @date 2022-02-24
+ * @date 2022-03-01
  */
 @Service
 public class RecordServiceImpl implements IRecordService 
@@ -55,10 +54,7 @@ public class RecordServiceImpl implements IRecordService
     @Override
     public int insertRecord(Record record)
     {
-        record.setUpdateBy(ShiroUtils.getLoginName());
-        record.setCreateBy(ShiroUtils.getLoginName());
         record.setCreateTime(DateUtils.getNowDate());
-        record.setUpdateTime(DateUtils.getNowDate());
         return recordMapper.insertRecord(record);
     }
 
@@ -71,7 +67,6 @@ public class RecordServiceImpl implements IRecordService
     @Override
     public int updateRecord(Record record)
     {
-        record.setUpdateBy(ShiroUtils.getLoginName());
         record.setUpdateTime(DateUtils.getNowDate());
         return recordMapper.updateRecord(record);
     }
