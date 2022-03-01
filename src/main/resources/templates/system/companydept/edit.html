@@ -19,7 +19,7 @@
                 <div class="col-sm-8">
                     <select id="company" name="company" class="form-control">
                         <option>请选择所属公司</option>
-                        <option th:each="company:${companies}" th:value="${company.id}" th:text="${company.name}" ></option>
+                        <option th:each="company:${companies}" th:value="${company.id}" th:text="${company.name}" th:field="*{companyId}" ></option>
                     </select>
                 </div>
             </div>

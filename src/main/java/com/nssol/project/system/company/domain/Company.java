@@ -28,30 +28,30 @@ public class Company extends BaseEntity
 
     /** 是否为客户 */
     @Excel(name = "是否为客户")
-    private Long iscustomer;
+    private Long isCustomer;
 
     /** 是否为供应商 */
     @Excel(name = "是否为供应商")
-    private Long isvendor;
+    private Long isVendor;
 
     /** 是否有效 */
     @Excel(name = "是否有效")
     private Long available;
 
-    public Long getIscustomer() {
-        return iscustomer;
+    public Long getIsCustomer() {
+        return isCustomer;
     }
 
-    public void setIscustomer(Long iscustomer) {
-        this.iscustomer = iscustomer;
+    public void setIsCustomer(Long isCustomer) {
+        this.isCustomer = isCustomer;
     }
 
-    public Long getIsvendor() {
-        return isvendor;
+    public Long getIsVendor() {
+        return isVendor;
     }
 
-    public void setIsvendor(Long isvendor) {
-        this.isvendor = isvendor;
+    public void setIsVendor(Long isVendor) {
+        this.isVendor = isVendor;
     }
 
     public void setId(Long id)

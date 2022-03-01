@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="vendorName"    column="vendor_name"    />
         <result property="available"    column="available"    />
         <result property="createBy"    column="create_by"    />
-        <result property="vendorManday"    column="vendor_manday"    />
+        <result property="vendorManDay"    column="vendor_manday"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="remark"    column="remark"    />
@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="entrustType != null "> and p.entrust_type = #{entrustType}</if>
             <if test="vendorName != null  and vendorName != ''"> and p.vendor_name like concat('%', #{vendorName}, '%')</if>
             <if test="available != null "> and p.available = #{available}</if>
-            <if test="vendorManday != null "> and p.vendor_manday = #{vendorManday}</if>
+            <if test="vendorManDay != null "> and p.vendor_manday = #{vendorManDay}</if>
         </where>
     </select>
     
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="vendorName != null">vendor_name,</if>
             <if test="available != null">available,</if>
             <if test="createBy != null">create_by,</if>
-            <if test="vendorManday != null">vendor_manday,</if>
+            <if test="vendorManDay != null">vendor_manday,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="remark != null">remark,</if>
@@ -95,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="vendorName != null">#{vendorName},</if>
             <if test="available != null">#{available},</if>
             <if test="createBy != null">#{createBy},</if>
-            <if test="vendorManday != null">#{vendorManday},</if>
+            <if test="vendorManDay != null">#{vendorManDay},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="remark != null">#{remark},</if>
@@ -117,7 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="vendorName != null">vendor_name = #{vendorName},</if>
             <if test="available != null">available = #{available},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
-            <if test="vendorManday != null">vendor_manday = #{vendorManday},</if>
+            <if test="vendorManDay != null">vendor_manday = #{vendorManDay},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="remark != null">remark = #{remark},</if>

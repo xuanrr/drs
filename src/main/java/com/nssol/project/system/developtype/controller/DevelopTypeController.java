@@ -21,9 +21,9 @@ import com.nssol.framework.web.page.TableDataInfo;
 
 /**
  * 运维类型Controller
- *
+ * 
  * @author zxy
- * @date 2022-02-21
+ * @date 2022-03-01
  */
 @Controller
 @RequestMapping("/system/developtype")
@@ -93,10 +93,10 @@ public class DevelopTypeController extends BaseController
      * 修改运维类型
      */
     @RequiresPermissions("system:developtype:edit")
-    @GetMapping("/edit/{name}")
-    public String edit(@PathVariable("name") String name, ModelMap mmap)
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
-        DevelopType developType = developTypeService.selectDevelopTypeByName(name);
+        DevelopType developType = developTypeService.selectDevelopTypeById(id);
         mmap.put("developType", developType);
         return prefix + "/edit";
     }
@@ -122,6 +122,6 @@ public class DevelopTypeController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(developTypeService.deleteDevelopTypeByNames(ids));
+        return toAjax(developTypeService.deleteDevelopTypeByIds(ids));
     }
 }

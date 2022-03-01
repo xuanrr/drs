@@ -7,17 +7,17 @@ import com.nssol.project.system.developtype.domain.DevelopType;
  * 运维类型Service接口
  * 
  * @author zxy
- * @date 2022-01-04
+ * @date 2022-03-01
  */
 public interface IDevelopTypeService 
 {
     /**
      * 查询运维类型
      * 
-     * @param name 运维类型主键
+     * @param id 运维类型主键
      * @return 运维类型
      */
-    public DevelopType selectDevelopTypeByName(String name);
+    public DevelopType selectDevelopTypeById(Long id);
 
     /**
      * 查询运维类型列表
@@ -46,16 +46,21 @@ public interface IDevelopTypeService
     /**
      * 批量删除运维类型
      * 
-     * @param names 需要删除的运维类型主键集合
+     * @param ids 需要删除的运维类型主键集合
      * @return 结果
      */
-    public int deleteDevelopTypeByNames(String names);
+    public int deleteDevelopTypeByIds(String ids);
 
+    /**
+     * 查询所有运维类型
+     * @return 运维类型集合
+     */
+    public List<DevelopType> selectAllDevelopType();
     /**
      * 删除运维类型信息
      * 
-     * @param name 运维类型主键
+     * @param id 运维类型主键
      * @return 结果
      */
-    public int deleteDevelopTypeByName(String name);
+    public int deleteDevelopTypeById(Long id);
 }

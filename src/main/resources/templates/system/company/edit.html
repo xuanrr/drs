@@ -19,7 +19,7 @@
                 <label class="col-sm-3 control-label">是否为供应商：</label>
                 <div class="col-sm-8">
                     <div class="radio-box" th:each="dict : ${@dict.getType('sys_yes_no')}">
-                        <input type="radio" th:id="${'isvendor_' + dict.dictCode}" name="isvendor" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <input type="radio" th:id="${'isvendor_' + dict.dictCode}" name="isvendor" th:value="${dict.dictValue}" th:field="*{isVendor}">
                         <label th:for="${'isvendor_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                 <label class="col-sm-3 control-label">是否为客户：</label>
                 <div class="col-sm-8">
                     <div class="radio-box" th:each="dict : ${@dict.getType('sys_yes_no')}">
-                        <input type="radio" th:id="${'iscustomer_' + dict.dictCode}" name="iscustomer" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <input type="radio" th:id="${'iscustomer_' + dict.dictCode}" name="iscustomer" th:value="${dict.dictValue}" th:field="*{isCustomer}">
                         <label th:for="${'iscustomer_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
                     </div>
                 </div>

@@ -16,11 +16,17 @@
                             </li>
                             <li>
                                 <label>项目：</label>
-                                <input type="text" name="projectId"/>
+                                <select name="projectId">
+                                    <option value="">所有</option>
+                                    <option th:each="project:${projects}" th:value="${project.id}" th:text="${project.name}" ></option>
+                                </select>
                             </li>
                             <li>
                                 <label>运维类型：</label>
-                                <input type="text" name="developTypeId"/>
+                                <select name="developTypeId">
+                                    <option value="">所有</option>
+                                    <option th:each="developType:${developTypes}" th:value="${developType.id}" th:text="${developType.name}" ></option>
+                                </select>
                             </li>
                             <li>
                                 <label>状态：</label>
@@ -44,6 +50,10 @@
                             <li>
                                 <label>完成日期：</label>
                                 <input type="text" class="time-input" placeholder="请选择完成日期" name="completeDate"/>
+                            </li>
+                            <li>
+                                <label>工时：</label>
+                                <input type="text" name="manDay"/>
                             </li>
                             <li>
                                 <label>确认日期：</label>
@@ -105,11 +115,11 @@
                     title: '画面'
                 },
                 {
-                    field: 'projectId',
+                    field: 'projectName',
                     title: '项目'
                 },
                 {
-                    field: 'developTypeId',
+                    field: 'developName',
                     title: '运维类型'
                 },
                 {
@@ -142,6 +152,10 @@
                 {
                     field: 'completeDate',
                     title: '完成日期'
+                },
+                {
+                    field: 'manDay',
+                    title: '工时'
                 },
                 {
                     field: 'confirmDate',

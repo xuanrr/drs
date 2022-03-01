@@ -7,9 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="Company" id="CompanyResult">
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
-        <result property="isvendor"    column="isvendor"    />
+        <result property="isVendor"    column="isvendor"    />
         <result property="code"    column="code"    />
-        <result property="iscustomer"    column="iscustomer"    />
+        <result property="isCustomer"    column="iscustomer"    />
         <result property="remark"    column="remark"    />
         <result property="available"    column="available"    />
         <result property="createBy"    column="create_by"    />
@@ -30,9 +30,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectCompanyVo"/>
         <where>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="isvendor != null "> and isvendor = #{isvendor}</if>
+            <if test="isVendor != null "> and isvendor = #{isVendor}</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
-            <if test="iscustomer != null "> and iscustomer = #{iscustomer}</if>
+            <if test="isCustomer != null "> and iscustomer = #{isCustomer}</if>
             <if test="available != null "> and available = #{available}</if>
         </where>
     </select>
@@ -59,9 +59,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into m_company
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null and name != ''">name,</if>
-            <if test="isvendor != null">isvendor,</if>
+            <if test="isVendor != null">isvendor,</if>
             <if test="code != null">code,</if>
-            <if test="iscustomer != null">iscustomer,</if>
+            <if test="isCustomer != null">iscustomer,</if>
             <if test="remark != null">remark,</if>
             <if test="available != null">available,</if>
             <if test="createBy != null">create_by,</if>
@@ -71,9 +71,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null and name != ''">#{name},</if>
-            <if test="isvendor != null">#{isvendor},</if>
+            <if test="isVendor != null">#{isvendor},</if>
             <if test="code != null">#{code},</if>
-            <if test="iscustomer != null">#{iscustomer},</if>
+            <if test="isCustomer != null">#{iscustomer},</if>
             <if test="remark != null">#{remark},</if>
             <if test="available != null">#{available},</if>
             <if test="createBy != null">#{createBy},</if>
@@ -87,9 +87,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update m_company
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null and name != ''">name = #{name},</if>
-            <if test="isvendor != null">isvendor = #{isvendor},</if>
+            <if test="isVendor != null">isvendor = #{isvendor},</if>
             <if test="code != null">code = #{code},</if>
-            <if test="iscustomer != null">iscustomer = #{iscustomer},</if>
+            <if test="isCustomer != null">iscustomer = #{iscustomer},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="available != null">available = #{available},</if>
             <if test="createBy != null">create_by = #{createBy},</if>

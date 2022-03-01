@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="presentor"    column="presentor"    />
         <result property="presentDate"    column="present_date"    />
         <result property="operator"    column="operator"    />
+        <result property="manDay"    column="manday"    />
         <result property="completeDate"    column="complete_date"    />
         <result property="confirmDate"    column="confirm_date"    />
         <result property="createTime"    column="create_time"    />
@@ -26,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectRecordVo">
-        select r.id, r.page, r.project_id, r.develop_type_id, r.problem, r.develop_detail, r.status, r.presentor, r.present_date, r.operator, r.complete_date, r.confirm_date, r.create_time, r.create_by, r.update_time, r.update_by,
+        select r.id, r.page, r.project_id, r.develop_type_id, r.problem, r.develop_detail, r.status, r.presentor, r.present_date, r.operator,r.manday, r.complete_date, r.confirm_date, r.create_time, r.create_by, r.update_time, r.update_by,
                p.name as project_name,
                dt.name as develop_name
         from m_record r
@@ -48,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="presentor != null  and presentor != ''"> and r.presentor = #{presentor}</if>
             <if test="presentDate != null "> and r.present_date = #{presentDate}</if>
             <if test="operator != null  and operator != ''"> and r.operator = #{operator}</if>
+            <if test="manDay != null  and manDay != ''"> and r.manday = #{manDay}</if>
             <if test="completeDate != null "> and r.complete_date = #{completeDate}</if>
             <if test="confirmDate != null "> and r.confirm_date = #{confirmDate}</if>
         </where>
@@ -70,6 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="presentor != null and presentor != ''">presentor,</if>
             <if test="presentDate != null">present_date,</if>
             <if test="operator != null and operator != ''">operator,</if>
+            <if test="manDay != null and manDay != ''">manday,</if>
             <if test="completeDate != null">complete_date,</if>
             <if test="confirmDate != null">confirm_date,</if>
             <if test="createTime != null">create_time,</if>
@@ -87,6 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="presentor != null and presentor != ''">#{presentor},</if>
             <if test="presentDate != null">#{presentDate},</if>
             <if test="operator != null and operator != ''">#{operator},</if>
+            <if test="manDay != null and manDay != ''">#{manDay},</if>
             <if test="completeDate != null">#{completeDate},</if>
             <if test="confirmDate != null">#{confirmDate},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -108,6 +112,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="presentor != null and presentor != ''">presentor = #{presentor},</if>
             <if test="presentDate != null">present_date = #{presentDate},</if>
             <if test="operator != null and operator != ''">operator = #{operator},</if>
+            <if test="manDay != null and manDay != ''">manday = #{manDay},</if>
             <if test="completeDate != null">complete_date = #{completeDate},</if>
             <if test="confirmDate != null">confirm_date = #{confirmDate},</if>
             <if test="createTime != null">create_time = #{createTime},</if>

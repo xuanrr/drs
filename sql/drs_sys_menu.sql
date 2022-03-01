@@ -1,3 +1,25 @@
+create table sys_menu
+(
+    menu_id     bigint auto_increment comment '菜单ID'
+        primary key,
+    menu_name   varchar(50)              not null comment '菜单名称',
+    parent_id   bigint       default 0   null comment '父菜单ID',
+    order_num   int          default 0   null comment '显示顺序',
+    url         varchar(200) default '#' null comment '请求地址',
+    target      varchar(20)  default ''  null comment '打开方式（menuItem页签 menuBlank新窗口）',
+    menu_type   char         default ''  null comment '菜单类型（M目录 C菜单 F按钮）',
+    visible     char         default '0' null comment '菜单状态（0显示 1隐藏）',
+    is_refresh  char         default '1' null comment '是否刷新（0刷新 1不刷新）',
+    perms       varchar(100)             null comment '权限标识',
+    icon        varchar(100) default '#' null comment '菜单图标',
+    create_by   varchar(64)  default ''  null comment '创建者',
+    create_time datetime                 null comment '创建时间',
+    update_by   varchar(64)  default ''  null comment '更新者',
+    update_time datetime                 null comment '更新时间',
+    remark      varchar(500) default ''  null comment '备注'
+)
+    comment '菜单权限表';
+
 INSERT INTO drs.sys_menu (menu_id, menu_name, parent_id, order_num, url, target, menu_type, visible, is_refresh, perms, icon, create_by, create_time, update_by, update_time, remark) VALUES (1, '系统管理', 0, 1, '#', '', 'M', '0', '1', '', 'fa fa-gear', 'admin', '2021-12-20 14:28:19', '', null, '系统管理目录');
 INSERT INTO drs.sys_menu (menu_id, menu_name, parent_id, order_num, url, target, menu_type, visible, is_refresh, perms, icon, create_by, create_time, update_by, update_time, remark) VALUES (2, '系统监控', 0, 2, '#', 'menuItem', 'M', '1', '1', '', 'fa fa-video-camera', 'admin', '2021-12-20 14:28:19', 'admin', '2021-12-20 17:39:08', '系统监控目录');
 INSERT INTO drs.sys_menu (menu_id, menu_name, parent_id, order_num, url, target, menu_type, visible, is_refresh, perms, icon, create_by, create_time, update_by, update_time, remark) VALUES (3, '系统工具', 0, 3, '#', 'menuItem', 'M', '0', '1', '', 'fa fa-bars', 'admin', '2021-12-20 14:28:19', 'admin', '2021-12-21 09:27:10', '系统工具目录');

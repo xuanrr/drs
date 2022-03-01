@@ -70,14 +70,14 @@ public class Project extends BaseEntity
 
     /** 供应商人天 */
     @Excel(name = "供应商人天")
-    private Long vendorManday;
+    private Long vendorManDay;
 
-    public Long getVendorManday() {
-        return vendorManday;
+    public Long getVendorManDay() {
+        return vendorManDay;
     }
 
-    public void setVendorManday(Long vendorManday) {
-        this.vendorManday = vendorManday;
+    public void setVendorManDay(Long vendorManday) {
+        this.vendorManDay = vendorManday;
     }
 
     public String getCustomerName() {

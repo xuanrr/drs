@@ -65,6 +65,10 @@ public class Record extends BaseEntity
     @Excel(name = "操作人")
     private String operator;
 
+    /** 工时 */
+    @Excel(name = "工时")
+    private Long manDay;
+
     /** 完成日期 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "完成日期", width = 30, dateFormat = "yyyy-MM-dd")
@@ -151,6 +155,10 @@ public class Record extends BaseEntity
         this.presentor = presentor;
     }
 
+    public Long getManDay() {return manDay;}
+
+    public void setManDay(Long manDay) {this.manDay = manDay;}
+
     public String getPresentor()
     {
         return presentor;
@@ -207,6 +215,7 @@ public class Record extends BaseEntity
             .append("presentor", getPresentor())
             .append("presentDate", getPresentDate())
             .append("operator", getOperator())
+            .append("manDay", getManDay())
             .append("completeDate", getCompleteDate())
             .append("confirmDate", getConfirmDate())
             .append("createTime", getCreateTime())

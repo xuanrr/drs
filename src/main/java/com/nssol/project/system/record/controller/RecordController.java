@@ -45,11 +45,12 @@ public class RecordController extends BaseController
 
     @RequiresPermissions("system:record:view")
     @GetMapping()
-    public String record()
+    public String record(ModelMap mmap)
     {
+        mmap.put("developTypes", developTypeMapper.selectAllDevelopType());
+        mmap.put("projects", projectMapper.selectAllProjects());
         return prefix + "/record";
     }
-
     /**
      * 查询运维记录列表
      */

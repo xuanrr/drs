@@ -1,3 +1,18 @@
+create table sys_logininfor
+(
+    info_id        bigint auto_increment comment '访问ID'
+        primary key,
+    login_name     varchar(50)  default ''  null comment '登录账号',
+    ipaddr         varchar(128) default ''  null comment '登录IP地址',
+    login_location varchar(255) default ''  null comment '登录地点',
+    browser        varchar(50)  default ''  null comment '浏览器类型',
+    os             varchar(50)  default ''  null comment '操作系统',
+    status         char         default '0' null comment '登录状态（0成功 1失败）',
+    msg            varchar(255) default ''  null comment '提示消息',
+    login_time     datetime                 null comment '访问时间'
+)
+    comment '系统访问记录';
+
 INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (100, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-12-20 14:30:15');
 INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (101, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-12-20 14:33:22');
 INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (102, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-12-20 14:33:30');
@@ -208,3 +223,13 @@ INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, bro
 INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (307, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-02-28 17:39:10');
 INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (308, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 09:42:27');
 INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (309, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 10:36:36');
+INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (310, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 10:57:05');
+INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (311, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 11:13:58');
+INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (312, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 11:18:58');
+INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (313, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 11:19:09');
+INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (314, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 14:28:37');
+INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (315, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 14:33:00');
+INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (316, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 14:50:52');
+INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (317, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 14:58:46');
+INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (318, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 15:15:06');
+INSERT INTO drs.sys_logininfor (info_id, login_name, ipaddr, login_location, browser, os, status, msg, login_time) VALUES (319, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-03-01 15:30:19');

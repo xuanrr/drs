@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * 运维类型Mapper接口
  * 
  * @author zxy
- * @date 2022-01-04
+ * @date 2022-03-01
  */
 @Repository
 public interface DevelopTypeMapper 
@@ -16,12 +16,16 @@ public interface DevelopTypeMapper
     /**
      * 查询运维类型
      * 
-     * @param name 运维类型主键
+     * @param id 运维类型主键
      * @return 运维类型
      */
-    public DevelopType selectDevelopTypeByName(String name);
-
+    public DevelopType selectDevelopTypeById(Long id);
+    /**
+     * 查询所有运维类型
+     * @return 运维类型集合
+     */
     public List<DevelopType> selectAllDevelopType();
+
     /**
      * 查询运维类型列表
      * 
@@ -49,16 +53,16 @@ public interface DevelopTypeMapper
     /**
      * 删除运维类型
      * 
-     * @param name 运维类型主键
+     * @param id 运维类型主键
      * @return 结果
      */
-    public int deleteDevelopTypeByName(String name);
+    public int deleteDevelopTypeById(Long id);
 
     /**
      * 批量删除运维类型
      * 
-     * @param names 需要删除的数据主键集合
+     * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteDevelopTypeByNames(String[] names);
+    public int deleteDevelopTypeByIds(String[] ids);
 }

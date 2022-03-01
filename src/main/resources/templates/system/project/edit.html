@@ -53,7 +53,7 @@
                 <label class="col-sm-3 control-label">客户:</label>
                 <div class="col-sm-8">
                     <select id="customer" name="customer" class="form-control">
-                        <option th:each="customer:${customers}" th:value="${customer.id}" th:text="${customer.name}" ></option>
+                        <option th:each="customer:${customers}" th:value="${customer.id}" th:text="${customer.name}" th:field="*{customerId}"></option>
                     </select>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <div class="col-sm-8">
                     <select id="vendor" name="vendor" class="form-control">
 <!--                        <option value="" selected>请选择供应商</option>-->
-                        <option th:each="vendor:${vendors}" th:value="${vendor.name}" th:text="${vendor.name}"></option>
+                        <option th:each="vendor:${vendors}" th:value="${vendor.name}" th:text="${vendor.name}" th:field="*{vendorName}"></option>
                     </select>
 
                 </div>
@@ -88,8 +88,7 @@
                 <label class="col-sm-3 control-label">委托方式：</label>
                 <div class="col-sm-8">
                     <select id="entrustType" name="entrustType" th:with="type=${@dict.getType('m_entrust_type')}" class="form-control">
-                        <option value="" selected>请选择委托方式</option>
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{entrustType}"></option>
                     </select>
                 </div>
             </div>

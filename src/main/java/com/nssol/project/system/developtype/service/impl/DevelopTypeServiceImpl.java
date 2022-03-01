@@ -2,7 +2,6 @@ package com.nssol.project.system.developtype.service.impl;
 
 import java.util.List;
 import com.nssol.common.utils.DateUtils;
-import com.nssol.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.nssol.project.system.developtype.mapper.DevelopTypeMapper;
@@ -14,7 +13,7 @@ import com.nssol.common.utils.text.Convert;
  * 运维类型Service业务层处理
  * 
  * @author zxy
- * @date 2022-01-04
+ * @date 2022-03-01
  */
 @Service
 public class DevelopTypeServiceImpl implements IDevelopTypeService 
@@ -25,15 +24,23 @@ public class DevelopTypeServiceImpl implements IDevelopTypeService
     /**
      * 查询运维类型
      * 
-     * @param name 运维类型主键
+     * @param id 运维类型主键
      * @return 运维类型
      */
     @Override
-    public DevelopType selectDevelopTypeByName(String name)
+    public DevelopType selectDevelopTypeById(Long id)
     {
-        return developTypeMapper.selectDevelopTypeByName(name);
+        return developTypeMapper.selectDevelopTypeById(id);
     }
 
+    /**
+     * 查询所有运维类型
+     * @return 运维类型集合
+     */
+    @Override
+    public List<DevelopType> selectAllDevelopType(){
+        return developTypeMapper.selectAllDevelopType();
+    };
     /**
      * 查询运维类型列表
      * 
@@ -55,9 +62,6 @@ public class DevelopTypeServiceImpl implements IDevelopTypeService
     @Override
     public int insertDevelopType(DevelopType developType)
     {
-        developType.setUpdateBy(ShiroUtils.getLoginName());
-        developType.setUpdateTime(DateUtils.getNowDate());
-        developType.setCreateBy(ShiroUtils.getLoginName());
         developType.setCreateTime(DateUtils.getNowDate());
         return developTypeMapper.insertDevelopType(developType);
     }
@@ -71,7 +75,6 @@ public class DevelopTypeServiceImpl implements IDevelopTypeService
     @Override
     public int updateDevelopType(DevelopType developType)
     {
-        developType.setUpdateBy(ShiroUtils.getLoginName());
         developType.setUpdateTime(DateUtils.getNowDate());
         return developTypeMapper.updateDevelopType(developType);
     }
@@ -79,24 +82,24 @@ public class DevelopTypeServiceImpl implements IDevelopTypeService
     /**
      * 批量删除运维类型
      * 
-     * @param names 需要删除的运维类型主键
+     * @param ids 需要删除的运维类型主键
      * @return 结果
      */
     @Override
-    public int deleteDevelopTypeByNames(String names)
+    public int deleteDevelopTypeByIds(String ids)
     {
-        return developTypeMapper.deleteDevelopTypeByNames(Convert.toStrArray(names));
+        return developTypeMapper.deleteDevelopTypeByIds(Convert.toStrArray(ids));
     }
 
     /**
      * 删除运维类型信息
      * 
-     * @param name 运维类型主键
+     * @param id 运维类型主键
      * @return 结果
      */
     @Override
-    public int deleteDevelopTypeByName(String name)
+    public int deleteDevelopTypeById(Long id)
     {
-        return developTypeMapper.deleteDevelopTypeByName(name);
+        return developTypeMapper.deleteDevelopTypeById(id);
     }
 }
