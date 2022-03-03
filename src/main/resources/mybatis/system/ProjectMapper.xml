@@ -59,6 +59,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
 
+    <select id="selectProjectByName" parameterType="String" resultMap="ProjectResult">
+        <include refid="selectProjectVo"/>
+        where name like #{name}
+    </select>
+
     <select id="selectAllProjects" resultMap="ProjectResult">
         select * from m_project
     </select>

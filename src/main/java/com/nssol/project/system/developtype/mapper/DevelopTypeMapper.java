@@ -20,6 +20,8 @@ public interface DevelopTypeMapper
      * @return 运维类型
      */
     public DevelopType selectDevelopTypeById(Long id);
+
+    public DevelopType selectDevelopTypeByName(String name);
     /**
      * 查询所有运维类型
      * @return 运维类型集合

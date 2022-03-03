@@ -1,9 +1,11 @@
 package com.nssol.project.system.record.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.nssol.project.system.developtype.mapper.DevelopTypeMapper;
 import com.nssol.project.system.project.mapper.ProjectMapper;
+import com.nssol.project.system.user.domain.User;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import com.nssol.framework.web.controller.BaseController;
 import com.nssol.framework.web.domain.AjaxResult;
 import com.nssol.common.utils.poi.ExcelUtil;
 import com.nssol.framework.web.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 运维记录Controller
@@ -101,6 +104,27 @@ public class RecordController extends BaseController
         return toAjax(recordService.insertRecord(record));
     }
 
+
+    @Log(title = "运维记录", businessType = BusinessType.IMPORT)
+    @RequiresPermissions("system:record:import")
+    @PostMapping("/importData")
+    @ResponseBody
+    public AjaxResult importData(MultipartFile file) throws Exception
+    {
+        ExcelUtil<Record> util = new ExcelUtil<Record>(Record.class);
+        List<Record> recordList = util.importExcel(file.getInputStream());
+        String message = recordService.importRecord(recordList);
+        return AjaxResult.success(message);
+    }
+
+    @RequiresPermissions("system:record:view")
+    @GetMapping("/importTemplate")
+    @ResponseBody
+    public AjaxResult importTemplate()
+    {
+        ExcelUtil<Record> util = new ExcelUtil<Record>(Record.class);
+        return util.importTemplateExcel("运维记录");
+    }
     /**
      * 修改运维记录
      */

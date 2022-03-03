@@ -2,6 +2,7 @@ package com.nssol.project.system.record.service;
 
 import java.util.List;
 import com.nssol.project.system.record.domain.Record;
+import com.nssol.project.system.user.domain.User;
 
 /**
  * 运维记录Service接口
@@ -58,4 +59,12 @@ public interface IRecordService
      * @return 结果
      */
     public int deleteRecordById(Long id);
+
+    /**
+     * 导入用户数据
+     *
+     * @param recordList 用户数据列表
+     * @return 结果
+     */
+    public String importRecord(List<Record> recordList);
 }
